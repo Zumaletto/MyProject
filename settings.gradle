@@ -1,3 +1,4 @@
 rootProject.name = 'NewProject'
 include 'sandbox'
+include 'Point'
 
