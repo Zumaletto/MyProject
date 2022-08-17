@@ -10,7 +10,7 @@ public class TestPoint{
         Point p1 = new Point(42,38);
         Point p2 = new Point(-33,28);
         double dist = Math.ceil(Point.distance(p1,p2));
-        Assert.assertEquals(dist,76.0);
+        Assert.assertEquals(dist,74.0);
     }
 
     @Test
