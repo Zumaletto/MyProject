@@ -6,42 +6,20 @@ import org.testng.Assert;
 public class TestPoint{
 
     @Test
-    public void testLenghtRoundCeil(){
+    public void ifOneCoorOfPointNull(){
+        Point p1 = new Point(0,38);
+        Point p2 = new Point(115,0);
+        double dist = Math.round(p1.distance(p2));
+        Assert.assertEquals(dist,121.0);
+    }
+
+    @Test
+    public void ifOneCoorOfPointMinus(){
         Point p1 = new Point(42,38);
         Point p2 = new Point(-33,28);
-        double dist = Math.ceil(p1.distance(p2));
+        double dist = Math.round(p1.distance(p2));
         Assert.assertEquals(dist,76.0);
     }
 
-    @Test
-    public void testLenghtRoundFloor(){
-        Point p1 = new Point(42,38);
-        Point p2 = new Point(-33,28);
-        double dist = Math.floor(p1.distance(p2));
-        Assert.assertEquals(dist,75.0);
-    }
-
-    @Test
-    public void testLenghtRound(){
-        Point p1 = new Point(42,38);
-        Point p2 = new Point(-33,28);
-        double dist = Math.round(p1.distance(p2));
-        Assert.assertEquals(dist,76);
-    }
-
-    @Test
-    public void LenghtRoundWereCoorNull1(){
-        Point p1 = new Point(42,0);
-        Point p2 = new Point(-58,0);
-        double dist = Math.round(p1.distance(p2));
-        Assert.assertEquals(dist,100);
-    }
-    @Test
-    public void LenghtRoundWereCoorNull2(){
-        Point p1 = new Point(42,0);
-        Point p2 = new Point(0,27);
-        double dist = Math.round(p1.distance(p2));
-        Assert.assertEquals(dist,50);
-    }
 
 }
