@@ -6,10 +6,10 @@ public class Point {
        this.x = x;
        this.y = y;
    }
-    public static double distance(Point p1, Point p2) {
+    public double distance(Point p) {
 
-        double x = p1.x - p2.x;
-        double y = p1.y - p2.y;
+        double x = this.x - p.x;
+        double y = this.y - p.y;
         double dist = Math.sqrt((Math.pow(x, 2) + Math.pow(y, 2)));
         return dist;
     }

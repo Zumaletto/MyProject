@@ -9,7 +9,7 @@ public class TestPoint{
     public void testLenghtRoundCeil(){
         Point p1 = new Point(42,38);
         Point p2 = new Point(-33,28);
-        double dist = Math.ceil(Point.distance(p1,p2));
+        double dist = Math.ceil(p1.distance(p2));
         Assert.assertEquals(dist,76.0);
     }
 
@@ -17,7 +17,7 @@ public class TestPoint{
     public void testLenghtRoundFloor(){
         Point p1 = new Point(42,38);
         Point p2 = new Point(-33,28);
-        double dist = Math.floor(Point.distance(p1,p2));
+        double dist = Math.floor(p1.distance(p2));
         Assert.assertEquals(dist,75.0);
     }
 
@@ -25,7 +25,7 @@ public class TestPoint{
     public void testLenghtRound(){
         Point p1 = new Point(42,38);
         Point p2 = new Point(-33,28);
-        double dist = Math.round(Point.distance(p1,p2));
+        double dist = Math.round(p1.distance(p2));
         Assert.assertEquals(dist,76);
     }
 
@@ -33,14 +33,14 @@ public class TestPoint{
     public void LenghtRoundWereCoorNull1(){
         Point p1 = new Point(42,0);
         Point p2 = new Point(-58,0);
-        double dist = Math.round(Point.distance(p1,p2));
+        double dist = Math.round(p1.distance(p2));
         Assert.assertEquals(dist,100);
     }
     @Test
     public void LenghtRoundWereCoorNull2(){
         Point p1 = new Point(42,0);
         Point p2 = new Point(0,27);
-        double dist = Math.round(Point.distance(p1,p2));
+        double dist = Math.round(p1.distance(p2));
         Assert.assertEquals(dist,50);
     }
 
