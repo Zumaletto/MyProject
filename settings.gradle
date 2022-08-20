@@ -1,4 +1,5 @@
 rootProject.name = 'NewProject'
 include 'sandbox'
 include 'Point'
+include 'addressbook-web-tests'
 
