@@ -32,11 +32,11 @@ public class ContactCreationTests {
     @Test
     public void testCreateNewContact() throws Exception {
         initContactCreation();
-        fillInfoAboutName("1name", "middle name", "last name", "Kitty");
-        fillNameAndAddressOfTheCompany("LCW",
-                "Bolshaya Porokhovskaya str., 38, room 2, St. Petersburg, 195176");
-        fillContactInformation("+78123458675", "+79112222222", "+7812754896",
-                "+78123458675", "1223@mail.ru");
+        fillInfoAboutName(new ContactNameData("1name", "middle name", "last name", "Kitty"));
+        fillNameAndAddressOfTheCompany(
+                new CompanyData("LCW", "Bolshaya Porokhovskaya str., 38, room 2, St. Petersburg, 195176"));
+        fillContactInformation(
+                new ContactInformaationData("+78123458675", "+79112222222", "+7812754896", "+78123458675", "1223@mail.ru"));
         selectGroupOnAddNewPage("JavaGroup");
         submitContactCreation();
         goToHomePage();
@@ -48,46 +48,46 @@ public class ContactCreationTests {
         wd.findElement(By.xpath("//a[contains(@href, 'edit.php')]")).click();
     }
 
-    private void fillInfoAboutName(String firstName, String middleName, String lastName, String nickName) {
+    private void fillInfoAboutName(ContactNameData contactNameData) {
         wd.findElement(By.xpath("//input[@name='firstname']")).click();
         wd.findElement(By.xpath("//input[@name='firstname']")).clear();
-        wd.findElement(By.xpath("//input[@name='firstname']")).sendKeys(firstName);
+        wd.findElement(By.xpath("//input[@name='firstname']")).sendKeys(contactNameData.getFirstName());
         wd.findElement(By.xpath("//input[@name='middlename']")).click();
         wd.findElement(By.xpath("//input[@name='middlename']")).clear();
-        wd.findElement(By.xpath("//input[@name='middlename']")).sendKeys(middleName);
+        wd.findElement(By.xpath("//input[@name='middlename']")).sendKeys(contactNameData.getMiddleName());
         wd.findElement(By.xpath("//input[@name='lastname']")).click();
         wd.findElement(By.xpath("//input[@name='lastname']")).clear();
-        wd.findElement(By.xpath("//input[@name='lastname']")).sendKeys(lastName);
+        wd.findElement(By.xpath("//input[@name='lastname']")).sendKeys(contactNameData.getLastName());
         wd.findElement(By.xpath("//input[@name='nickname']")).click();
         wd.findElement(By.xpath("//input[@name='nickname']")).clear();
-        wd.findElement(By.xpath("//input[@name='nickname']")).sendKeys(nickName);
+        wd.findElement(By.xpath("//input[@name='nickname']")).sendKeys(contactNameData.getNickName());
     }
 
-    private void fillNameAndAddressOfTheCompany(String nameOfCompany, String addressOfCompany) {
+    private void fillNameAndAddressOfTheCompany(CompanyData companyData) {
         wd.findElement(By.xpath("//input[@name='company']")).click();
         wd.findElement(By.xpath("//input[@name='company']")).clear();
-        wd.findElement(By.xpath("//input[@name='company']")).sendKeys(nameOfCompany);
+        wd.findElement(By.xpath("//input[@name='company']")).sendKeys(companyData.getNameOfCompany());
         wd.findElement(By.xpath("//textarea[@name='address']")).click();
         wd.findElement(By.xpath("//textarea[@name='address']")).clear();
-        wd.findElement(By.xpath("//textarea[@name='address']")).sendKeys(addressOfCompany);
+        wd.findElement(By.xpath("//textarea[@name='address']")).sendKeys(companyData.getAddressOfCompany());
     }
 
-    private void fillContactInformation(String homeTel, String mobileTel, String workTel, String faxTel, String email) {
+    private void fillContactInformation(ContactInformaationData contactInformaationData) {
         wd.findElement(By.xpath("//input[@name='home']")).click();
         wd.findElement(By.xpath("//input[@name='home']")).clear();
-        wd.findElement(By.xpath("//input[@name='home']")).sendKeys(homeTel);
+        wd.findElement(By.xpath("//input[@name='home']")).sendKeys(contactInformaationData.getHomeTel());
         wd.findElement(By.xpath("//input[@name='mobile']")).click();
         wd.findElement(By.xpath("//input[@name='mobile']")).clear();
-        wd.findElement(By.xpath("//input[@name='mobile']")).sendKeys(mobileTel);
+        wd.findElement(By.xpath("//input[@name='mobile']")).sendKeys(contactInformaationData.getMobileTel());
         wd.findElement(By.xpath("//input[@name='work']")).click();
         wd.findElement(By.xpath("//input[@name='work']")).clear();
-        wd.findElement(By.xpath("//input[@name='work']")).sendKeys(workTel);
+        wd.findElement(By.xpath("//input[@name='work']")).sendKeys(contactInformaationData.getWorkTel());
         wd.findElement(By.xpath("//input[@name='fax']")).click();
         wd.findElement(By.xpath("//input[@name='fax']")).clear();
-        wd.findElement(By.xpath("//input[@name='fax']")).sendKeys(faxTel);
+        wd.findElement(By.xpath("//input[@name='fax']")).sendKeys(contactInformaationData.getFaxTel());
         wd.findElement(By.xpath("//input[@name='email']")).click();
         wd.findElement(By.xpath("//input[@name='email']")).clear();
-        wd.findElement(By.xpath("//input[@name='email']")).sendKeys(email);
+        wd.findElement(By.xpath("//input[@name='email']")).sendKeys(contactInformaationData.getEmail());
 
     }
 
