@@ -2,8 +2,6 @@ plugins {
     id 'java'
 }
 
-group 'org.example'
-version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
@@ -11,9 +9,10 @@ repositories {
 
 dependencies {
     testImplementation group: 'org.testng', name: 'testng', version: '7.6.1'
-    implementation 'org.seleniumhq.selenium:selenium-java:4.4.0'
+    testImplementation 'org.seleniumhq.selenium:selenium-java:4.4.0'
+    testImplementation group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.36'
 }
 
 test {
-    useJUnitPlatform()
+    useTestNG()
 }
