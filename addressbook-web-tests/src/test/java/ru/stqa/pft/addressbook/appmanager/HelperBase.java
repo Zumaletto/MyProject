@@ -5,24 +5,24 @@ import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 
 public class HelperBase {
-    protected WebDriver wd;
+    protected WebDriver click;
 
     public HelperBase(WebDriver wd) {
-        this.wd = wd;
+        this.click = wd;
     }
 
     protected void click(By locator) {
-        wd.findElement(locator).click();
+        click.findElement(locator).click();
     }
 
     protected void type(By locator, String text) {
         click(locator);
-        wd.findElement(locator).clear();
-        wd.findElement(locator).sendKeys(text);
+        click.findElement(locator).clear();
+        click.findElement(locator).sendKeys(text);
     }
     public boolean isAlertPresent() {
         try {
-            wd.switchTo().alert();
+            click.switchTo().alert();
             return true;
         } catch (NoAlertPresentException e) {
             return false;
