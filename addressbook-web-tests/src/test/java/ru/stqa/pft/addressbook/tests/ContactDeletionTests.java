@@ -6,7 +6,6 @@ public class ContactDeletionTests extends TestBase {
     @Test
     public void testContactDeletion() throws Exception{
         app.getNavigationHelper().goToAddNewPage();
-
     }
 
 }
