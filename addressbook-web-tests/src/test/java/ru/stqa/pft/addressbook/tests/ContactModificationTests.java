@@ -17,15 +17,6 @@ public class ContactModificationTests extends TestBase {
     }
 
     @Test
-    public void testDeleteContact() {
-        app.getNavigationHelper().goToHomePage();
-        app.getContactHelper().selectContact();
-        app.getContactHelper().deleteContact();
-        app.getContactHelper().closePopUp();
-        app.getNavigationHelper().goToHomePage();
-    }
-
-    @Test
     public void testSeeDetailsContact() {
         app.getNavigationHelper().goToHomePage();
         app.getContactHelper().selectDetails();
