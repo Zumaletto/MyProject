@@ -26,10 +26,10 @@ public class ContactHelper extends HelperBase {
         click.findElement(By.xpath("//input[21]"));
     }
     public void selectContact() {
-        click(By.xpath("//input[@id='4']"));
+        click(By.xpath("//table[@id='maintable']/tbody/tr[8]/td/input"));
     }
     public void submitContactModification() {
-        click(By.xpath("//input[6]"));
+        click(By.name("update"));
     }
     public void editContact() {
         click(By.xpath("//table[@id='maintable']/tbody/tr[8]/td[8]/a/img"));

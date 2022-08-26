@@ -3,7 +3,10 @@ package ru.stqa.pft.addressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.decorators.Decorated;
+import org.openqa.selenium.support.decorators.WebDriverDecorator;
 
+import java.lang.reflect.Method;
 import java.time.Duration;
 
 public class ApplicationManager {
@@ -15,7 +18,18 @@ public class ApplicationManager {
 
 
     public void init() {
-        wd = new ChromeDriver();
+       // wd = new ChromeDriver();
+        //задерка воспроизведения автотестов
+        wd = new WebDriverDecorator<>() {
+            public void beforeCall(Decorated<?> target, Method method, Object[] args) {
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }.decorate(new ChromeDriver());
+
         wd.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
         wd.get("http://localhost/addressbook/");
         groupHelper = new GroupHelper(wd);
