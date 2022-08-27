@@ -18,9 +18,9 @@ public class ApplicationManager {
 
 
     public void init() {
-       // wd = new ChromeDriver();
+       wd = new ChromeDriver();
         //задерка воспроизведения автотестов
-        wd = new WebDriverDecorator<>() {
+      /*  wd = new WebDriverDecorator<>() {
             public void beforeCall(Decorated<?> target, Method method, Object[] args) {
                 try {
                     Thread.sleep(500);
@@ -28,8 +28,7 @@ public class ApplicationManager {
                     throw new RuntimeException(e);
                 }
             }
-        }.decorate(new ChromeDriver());
-
+        }.decorate(new ChromeDriver());*/
         wd.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
         wd.get("http://localhost/addressbook/");
         groupHelper = new GroupHelper(wd);

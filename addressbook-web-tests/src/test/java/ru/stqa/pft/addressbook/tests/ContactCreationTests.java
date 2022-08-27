@@ -17,6 +17,24 @@ public class ContactCreationTests extends TestBase {
        app.getNavigationHelper().goToHomePage();
        app.logOut();
     }
+    @Test
+    public void testAddNext(){
+        app.getNavigationHelper().goToAddNewPage();
+        app.getContactHelper().fillContactForm(new ContactData( "Olesya", "Ivanovna", "Kirillova",
+                "niki", "LCA", "Bolshaya Porokhovskaya str., 38, room 2, St. Petersburg, 19517",
+                "+78123458675", "+79112222222", "+7812754896", "+78123458675", "1223@mail.ru"));
+        app.getContactHelper().submitContactCreation();
+        app.getNavigationHelper().goToAddNext();
+        app.getContactHelper().fillContactForm(new ContactData( "Olesya", "Ivanovna", "Kirillova",
+                "niki", "LCA", "Bolshaya Porokhovskaya str., 38, room 2, St. Petersburg, 19517",
+                "+78123458675", "+79112222222", "+7812754896", "+78123458675", "1223@mail.ru"));
+        app.getContactHelper().submitContactCreation();
+        app.getNavigationHelper().goToHomePage();
+        app.logOut();
+
+
+
+    }
 
 
 

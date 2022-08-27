@@ -8,15 +8,15 @@ public class NavigationHelper extends HelperBase {
 
         super(wd);
     }
-
     public void goToGroupPage() {
         click(By.linkText("groups"));
     }
-
+    public void goToAddNext() {
+        click(By.linkText("add next"));
+    }
     public void goToAddNewPage() {
         click(By.xpath("//a[contains(@href, 'edit.php')]"));
     }
-
     public void goToHomePage() {
         click(By.linkText("home"));
     }

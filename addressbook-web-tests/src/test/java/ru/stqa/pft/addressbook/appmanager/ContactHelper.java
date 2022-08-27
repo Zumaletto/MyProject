@@ -9,6 +9,10 @@ public class ContactHelper extends HelperBase {
     public ContactHelper(WebDriver wd) {
         super(wd);
     }
+    public void selectContact() {
+        //click(By.xpath("//input[@name='selected[]']"));
+        click(By.xpath("//td/input"));
+    }
     public void fillContactForm(ContactData contactData) {
         type(By.xpath("//input[@name='firstname']"), contactData.getFirstName());
         type(By.xpath("//input[@name='middlename']"), contactData.getMiddleName());
@@ -23,16 +27,13 @@ public class ContactHelper extends HelperBase {
         type(By.name("email"), contactData.getEmail());
     }
     public void submitContactCreation() {
-        click.findElement(By.xpath("//input[21]"));
-    }
-    public void selectContact() {
-        click(By.xpath("//table[@id='maintable']/tbody/tr[8]/td/input"));
+        click(By.xpath("//div[@id='content']/form/input[21]"));
     }
     public void submitContactModification() {
         click(By.name("update"));
     }
-    public void editContact() {
-        click(By.xpath("//table[@id='maintable']/tbody/tr[8]/td[8]/a/img"));
+    public void initEditContact() {
+        click(By.xpath("//img[@alt='Edit']"));
     }
     public void deleteContact() {
         click(By.xpath("//input[@value='Delete']"));
@@ -49,4 +50,6 @@ public class ContactHelper extends HelperBase {
     public void selectVcard() {
         click(By.xpath("//table[@id='maintable']/tbody/tr[8]/td[9]/a/img"));
     }
+
+
 }

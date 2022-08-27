@@ -8,7 +8,7 @@ public class ContactModificationTests extends TestBase {
     public void testContactModification() {
         app.getNavigationHelper().goToHomePage();
         app.getContactHelper().selectContact();
-        app.getContactHelper().editContact();
+        app.getContactHelper().initEditContact();
         app.getContactHelper().fillContactForm(new ContactData("Olesya", "Ivanovna", "Kirillova",
                 "niki", "LCA", "Bolshaya Porokhovskaya str., 38, room 2, St. Petersburg, 19517",
                 "+78123458675", "+79112222222", "+7812754896", "+78123458675", "1223@mail.ru"));
@@ -19,6 +19,7 @@ public class ContactModificationTests extends TestBase {
     @Test
     public void testSeeDetailsContact() {
         app.getNavigationHelper().goToHomePage();
+        app.getContactHelper().selectContact();
         app.getContactHelper().selectDetails();
         app.getNavigationHelper().goToHomePage();
     }
@@ -26,6 +27,7 @@ public class ContactModificationTests extends TestBase {
     @Test
     public void testDownloadVcard() {
         app.getNavigationHelper().goToHomePage();
+        app.getContactHelper().selectContact();
         app.getContactHelper().selectVcard();
     }
 }
