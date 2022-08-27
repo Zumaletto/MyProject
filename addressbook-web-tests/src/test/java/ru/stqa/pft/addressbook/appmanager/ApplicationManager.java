@@ -3,11 +3,12 @@ package ru.stqa.pft.addressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.decorators.Decorated;
-import org.openqa.selenium.support.decorators.WebDriverDecorator;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.BrowserType;
 
-import java.lang.reflect.Method;
 import java.time.Duration;
+import java.util.Objects;
 
 public class ApplicationManager {
     WebDriver wd;
@@ -15,11 +16,21 @@ public class ApplicationManager {
     private NavigationHelper navigationHelper;
     private GroupHelper groupHelper;
     private ContactHelper contactHelper;
+    private String browser;
 
+    public ApplicationManager(String browser) {
+        this.browser = browser;
+    }
 
     public void init() {
-       wd = new ChromeDriver();
-        //задерка воспроизведения автотестов
+        if (browser.equals(BrowserType.CHROME)) {
+            wd = new ChromeDriver();
+        } else if (browser.equals(BrowserType.FIREFOX)) {
+            wd = new FirefoxDriver();
+        } else if (browser.equals(BrowserType.IE)) {
+            wd = new InternetExplorerDriver();
+        }
+//задерка воспроизведения автотестов
       /*  wd = new WebDriverDecorator<>() {
             public void beforeCall(Decorated<?> target, Method method, Object[] args) {
                 try {
@@ -50,7 +61,10 @@ public class ApplicationManager {
         return groupHelper;
     }
 
-    public ContactHelper getContactHelper(){ return contactHelper;}
+    public ContactHelper getContactHelper() {
+        return contactHelper;
+    }
+
     public NavigationHelper getNavigationHelper() {
         return navigationHelper;
     }
