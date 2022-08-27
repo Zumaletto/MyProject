@@ -17,9 +17,12 @@ public class HelperBase {
 
     protected void type(By locator, String text) {
         click(locator);
-        click.findElement(locator).clear();
-        click.findElement(locator).sendKeys(text);
+        if (text != null) {
+            click.findElement(locator).clear();
+            click.findElement(locator).sendKeys(text);
+        }
     }
+
     public boolean isAlertPresent() {
         try {
             click.switchTo().alert();
