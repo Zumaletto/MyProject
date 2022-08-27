@@ -43,7 +43,7 @@ public class ContactHelper extends HelperBase {
     }
 
     public void closePopUp(){
-        click.switchTo().alert().accept();
+        wd.switchTo().alert().accept();
     }
 
     public void selectDetails() {

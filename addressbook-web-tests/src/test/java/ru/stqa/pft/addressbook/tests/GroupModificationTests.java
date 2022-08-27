@@ -13,13 +13,4 @@ public class GroupModificationTests extends TestBase {
         app.getGroupHelper().submitGroupModification();
         app.getGroupHelper().returnToGroupPage();
     }
-
-    @Test
-    public void testDeleteGroup() {
-        app.getNavigationHelper().goToGroupPage();
-        app.getGroupHelper().selectGroup();
-        app.getGroupHelper().initDeleteGroupModification();
-        app.getGroupHelper().returnToGroupPage();
-    }
-
 }

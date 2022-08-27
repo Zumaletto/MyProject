@@ -17,10 +17,10 @@ public class GroupHelper extends HelperBase {
 
     public void fillGroupForm(GroupData groupData) {
         type(By.name("group_name"), groupData.getName());
-        click.findElement(By.name("group_header")).clear();
-        click.findElement(By.name("group_header")).sendKeys(groupData.getHeader());
-        click.findElement(By.name("group_footer")).clear();
-        click.findElement(By.name("group_footer")).sendKeys(groupData.getFooter());
+        wd.findElement(By.name("group_header")).clear();
+        wd.findElement(By.name("group_header")).sendKeys(groupData.getHeader());
+        wd.findElement(By.name("group_footer")).clear();
+        wd.findElement(By.name("group_footer")).sendKeys(groupData.getFooter());
     }
 
     public void submitGroupCreation() {
