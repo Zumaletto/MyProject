@@ -7,10 +7,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.BrowserType;
-import org.openqa.selenium.support.decorators.Decorated;
-import org.openqa.selenium.support.decorators.WebDriverDecorator;
 
-import java.lang.reflect.Method;
 import java.time.Duration;
 
 public class ApplicationManager {
@@ -45,7 +42,7 @@ public class ApplicationManager {
             }
         }.decorate(new ChromeDriver());*/
 
-        wd.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+        wd.manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
         wd.get("http://localhost/addressbook/");
         groupHelper = new GroupHelper(wd);
         navigationHelper = new NavigationHelper(wd);

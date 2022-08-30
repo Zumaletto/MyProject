@@ -12,7 +12,7 @@ public class ContactModificationTests extends TestBase{
         app.getContactHelper().fillContactForm(
                 new ContactData("Elena", "Petrovna", "Dyeva",
                         " ", " ", "Bolshaya Porokhovskaya str., 38, room 2, St. Petersburg, 19517",
-                        " ", "+79112222222", " ", " ", "1223@mail.ru"));
+                        " ", "+79112222222", " ", " ", "1223@mail.ru", null), false);
         app.getContactHelper().submitEditContact();
         app.getContactHelper().returnToHomePage();
     }
@@ -26,7 +26,7 @@ public class ContactModificationTests extends TestBase{
         app.getContactHelper().fillContactForm(
                 new ContactData("First", " ", "Last",
                         " ", " ", "Bolshaya Porokhovskaya str., 38, room 2, St. Petersburg, 19517",
-                        " ", "+79112222222", " ", " ", "1223@mail.ru"));
+                        " ", "+79112222222", " ", " ", "1223@mail.ru", "test1"), false);
         app.getContactHelper().submitEditContact();
         app.getContactHelper().returnToHomePage();
     }
