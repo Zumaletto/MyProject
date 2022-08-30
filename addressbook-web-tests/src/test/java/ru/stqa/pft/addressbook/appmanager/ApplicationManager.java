@@ -1,20 +1,23 @@
 package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.BrowserType;
+import org.openqa.selenium.support.decorators.Decorated;
+import org.openqa.selenium.support.decorators.WebDriverDecorator;
 
+import java.lang.reflect.Method;
 import java.time.Duration;
-import java.util.Objects;
 
 public class ApplicationManager {
     WebDriver wd;
-    private SessionHelper sessionHelper;
     private NavigationHelper navigationHelper;
     private GroupHelper groupHelper;
+    private SessionHelper sessionHelper;
     private ContactHelper contactHelper;
     private String browser;
 
@@ -23,6 +26,7 @@ public class ApplicationManager {
     }
 
     public void init() {
+
         if (browser.equals(BrowserType.CHROME)) {
             wd = new ChromeDriver();
         } else if (browser.equals(BrowserType.FIREFOX)) {
@@ -30,8 +34,8 @@ public class ApplicationManager {
         } else if (browser.equals(BrowserType.IE)) {
             wd = new InternetExplorerDriver();
         }
-//задерка воспроизведения автотестов
-      /*  wd = new WebDriverDecorator<>() {
+        //задерка воспроизведения автотестов
+     /*   wd = new WebDriverDecorator<>() {
             public void beforeCall(Decorated<?> target, Method method, Object[] args) {
                 try {
                     Thread.sleep(500);
@@ -40,16 +44,18 @@ public class ApplicationManager {
                 }
             }
         }.decorate(new ChromeDriver());*/
+
         wd.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
         wd.get("http://localhost/addressbook/");
         groupHelper = new GroupHelper(wd);
-        contactHelper = new ContactHelper(wd);
         navigationHelper = new NavigationHelper(wd);
         sessionHelper = new SessionHelper(wd);
+        contactHelper = new ContactHelper(wd);
         sessionHelper.login("admin", "secret");
     }
 
-    public void logOut() {
+
+    public void logout() {
         wd.findElement(By.linkText("Logout")).click();
     }
 
@@ -57,15 +63,24 @@ public class ApplicationManager {
         wd.quit();
     }
 
+    private boolean isElementPresent(By by) {
+        try {
+            wd.findElement(by);
+            return true;
+        } catch (NoSuchElementException e) {
+            return false;
+        }
+    }
+
     public GroupHelper getGroupHelper() {
         return groupHelper;
     }
 
-    public ContactHelper getContactHelper() {
-        return contactHelper;
-    }
-
     public NavigationHelper getNavigationHelper() {
         return navigationHelper;
+    }
+
+    public ContactHelper getContactHelper() {
+        return contactHelper;
     }
 }

@@ -4,21 +4,23 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class NavigationHelper extends HelperBase {
-    public NavigationHelper(WebDriver wd) {
 
+    public NavigationHelper(WebDriver wd) {
         super(wd);
     }
-    public void goToGroupPage() {
+
+    public void gotoGroupPage() {
         click(By.linkText("groups"));
     }
-    public void goToAddNext() {
+    public void gotoAddNewPage() {
+        click(By.linkText("add new"));
+    }
+    public void gotoHomePage(){click(By.linkText("home"));}
+    public void logout() {
+        click(By.linkText("Logout"));
+    }
+    public void gotoAddNext() {
         click(By.linkText("add next"));
-    }
-    public void goToAddNewPage() {
-        click(By.xpath("//a[contains(@href, 'edit.php')]"));
-    }
-    public void goToHomePage() {
-        click(By.linkText("home"));
     }
 
 }

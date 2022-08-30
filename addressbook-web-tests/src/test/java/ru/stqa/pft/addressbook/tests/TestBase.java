@@ -6,16 +6,17 @@ import org.testng.annotations.BeforeMethod;
 import ru.stqa.pft.addressbook.appmanager.ApplicationManager;
 
 public class TestBase {
-//Запуск через Firefox
-     //protected final ApplicationManager app = new ApplicationManager(BrowserType.FIREFOX);
+    //Запуск через Firefox
+    protected final ApplicationManager app = new ApplicationManager(BrowserType.FIREFOX);
 //Запуск через Chrome
-    protected final ApplicationManager app = new ApplicationManager(BrowserType.CHROME);
+    // protected final ApplicationManager app = new ApplicationManager(BrowserType.CHROME);
 //Запуск через IE
-  //  protected final ApplicationManager app = new ApplicationManager(BrowserType.IE);
+    //  protected final ApplicationManager app = new ApplicationManager(BrowserType.IE);
 
     @BeforeMethod(alwaysRun = true)
     public void setUp() throws Exception {
         app.init();
+
     }
 
     @AfterMethod(alwaysRun = true)

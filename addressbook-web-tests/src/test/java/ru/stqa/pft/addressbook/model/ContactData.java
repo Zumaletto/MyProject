@@ -6,22 +6,21 @@ public class ContactData {
     private final String lastName;
     private final String nickName;
     private final String nameOfCompany;
-    private final String addressOfCompany;
+    private final String address;
     private final String homeTel;
     private final String mobileTel;
     private final String workTel;
     private final String faxTel;
     private final String email;
 
-    public ContactData(String firstName, String middleName, String lastName, String nickName,
-                       String nameOfCompany, String addressOfCompany, String homeTel,
-                       String mobileTel, String workTel, String faxTel, String email) {
+    public ContactData(String firstName, String middleName, String lastName, String nickName, String nameOfCompany,
+                       String address, String homeTel, String mobileTel, String workTel, String faxTel, String email) {
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
         this.nickName = nickName;
         this.nameOfCompany = nameOfCompany;
-        this.addressOfCompany = addressOfCompany;
+        this.address = address;
         this.homeTel = homeTel;
         this.mobileTel = mobileTel;
         this.workTel = workTel;
@@ -41,14 +40,18 @@ public class ContactData {
         return lastName;
     }
 
-    public String getNickName() { return nickName; }
+    public String getNickName() {
+        return nickName;
+    }
+
     public String getNameOfCompany() {
         return nameOfCompany;
     }
 
-    public String getAddressOfCompany() {
-        return addressOfCompany;
+    public String getAddress() {
+        return address;
     }
+
     public String getHomeTel() {
         return homeTel;
     }
@@ -57,7 +60,7 @@ public class ContactData {
         return mobileTel;
     }
 
-    public String getWorkTel() {
+    public String getWork_tel() {
         return workTel;
     }
 
