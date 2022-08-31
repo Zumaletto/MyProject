@@ -63,11 +63,13 @@ public class ContactHelper extends HelperBase {
     }
 
     public void selectDetails() {
-        click(By.xpath("//table[@id='maintable']/tbody/tr[8]/td[7]/a/img"));
+        click(By.xpath("//img[@alt='Details']"));
     }
 
     public void selectVcard() {
-        click(By.xpath("//table[@id='maintable']/tbody/tr[8]/td[9]/a/img"));
+        //click(By.xpath("//table[@id='maintable']/tbody/tr[8]/td[9]/a/img"));
+        click(By.xpath("//img[@alt='vCard']"));
+
     }
 
     public void selectModifiy() {
