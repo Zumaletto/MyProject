@@ -26,7 +26,7 @@ public class NavigationHelper extends HelperBase {
     }
 
     public void gotoHomePage() {
-        if (!isElementPresent(By.id("maintable"))) {
+       if (!isElementPresent(By.id("maintable"))) {
             return;
         }
         click(By.linkText("home"));
@@ -37,9 +37,7 @@ public class NavigationHelper extends HelperBase {
         click(By.linkText("add next"));
     }
 
-    public void logout() {
+   /*public void logout() {
         click(By.linkText("Logout"));
-    }
-
-
+    }*/
 }
