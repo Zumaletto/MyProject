@@ -33,12 +33,13 @@ public class ContactHelper extends HelperBase {
         type(By.name("fax"), contactData.getFaxTel());
         type(By.name("email"), contactData.getEmail());
 
-        if (creation){
-            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
-        } else{
-            Assert.assertFalse(isElementPresent(By.name("new_group")));
-        }
 
+//проверка условия пр  выборе группы
+   /*     if (creation) {
+            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+        } else {
+            Assert.assertFalse(isElementPresent(By.name("new_group")));
+        } */
     }
 
     public void selectContact() {
@@ -75,5 +76,16 @@ public class ContactHelper extends HelperBase {
 
     public void submitDeleteContact() {
         click(By.xpath("//form[2]/input[2]"));
+    }
+
+    public void createContact(ContactData contact, boolean status) {
+        fillContactForm(contact, status);
+        submitContactCreation();
+        returnToHomePage();
+    }
+
+    public void createNextContact(ContactData contact, boolean status) {
+        fillContactForm(contact, status);
+        submitContactCreation();
     }
 }
