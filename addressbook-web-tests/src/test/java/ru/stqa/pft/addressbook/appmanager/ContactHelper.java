@@ -2,6 +2,8 @@ package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 
 public class ContactHelper extends HelperBase {
@@ -10,12 +12,11 @@ public class ContactHelper extends HelperBase {
         super(wd);
     }
 
-    public void returnToHomePage() {
-        click(By.linkText("home page"));
-    }
-
-    public void submitContactCreation() {
-        click(By.xpath("//div[@id='content']/form/input[21]"));
+    public void createContact() {
+        fillContactForm(new ContactData("Mary", " ", "Chernikova",
+                "Mary", "LC WVC", "St. Petersburg",
+                " ", "+79112257222", "", "+78123458675", " ", "test1"), true);
+        submitContactCreation();
     }
 
     public void fillContactForm(ContactData contactData, boolean creation) {
@@ -30,14 +31,20 @@ public class ContactHelper extends HelperBase {
         type(By.name("work"), contactData.getWork_tel());
         type(By.name("fax"), contactData.getFaxTel());
         type(By.name("email"), contactData.getEmail());
-
-
 //проверка условия пр  выборе группы
-   /*     if (creation) {
+        if (creation) {
             new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
         } else {
             Assert.assertFalse(isElementPresent(By.name("new_group")));
-        } */
+        }
+    }
+
+    public void returnToHomePage() {
+        click(By.linkText("home page"));
+    }
+
+    public void submitContactCreation() {
+        click(By.xpath("//div[@id='content']/form/input[21]"));
     }
 
     public void selectContact() {
@@ -80,19 +87,14 @@ public class ContactHelper extends HelperBase {
         click(By.xpath("//form[2]/input[2]"));
     }
 
-    public void createContact(ContactData contact, boolean status) {
-        fillContactForm(contact, status);
-        submitContactCreation();
-        returnToHomePage();
-    }
-
-    public void createNextContact(ContactData contact, boolean status) {
-        fillContactForm(contact, status);
-        submitContactCreation();
-    }
 
     public boolean isThereContact() {
         return isElementPresent(By.xpath("//input[@name='selected[]']"));
     }
 
+  /*  public void createNextContact(ContactData contact, boolean status) {
+        fillContactForm(contact, status);
+        submitContactCreation();
+    }*/
 }
+

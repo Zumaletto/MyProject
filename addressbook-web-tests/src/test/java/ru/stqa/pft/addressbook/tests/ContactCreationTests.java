@@ -7,25 +7,21 @@ public class ContactCreationTests extends TestBase {
 
     @Test
     public void testContactCreation() throws Exception {
-
         app.getNavigationHelper().gotoAddNewPage();
-        app.getContactHelper().createContact(new ContactData("Alena", " ", "Nikitina",
-                "niki", "LCA", "Bolshaya Porokhovskaya str., 38, room 2, St. Petersburg, 19517",
-                "+78123458675", "+79112222222", "+7812754896", "+78123458675",
-                "1223@mail.ru", "test1"), true);
+        app.getContactHelper().createContact();
+        app.getContactHelper().returnToHomePage();
     }
 
     @Test
-    public void testAddNext() {
+    public void testAddNextContact() {
         app.getNavigationHelper().gotoAddNewPage();
-        app.getContactHelper().createNextContact(new ContactData("Olesya", "Ivanovna", "Kirillova",
-                "niki", "LCA", "Bolshaya Porokhovskaya str., 38, room 2, St. Petersburg, 19517",
-                "+78123458675", "+79112222222", "+7812754896", "+78123458675",
-                "1223@mail.ru", "test1"), true);
+        app.getContactHelper().createContact();
         app.getNavigationHelper().gotoAddNext();
-        app.getContactHelper().createContact(new ContactData("Mary", " ", "Chernikova",
+        app.getContactHelper().fillContactForm(new ContactData("Mary", " ", "Chernikova",
                 "Mary", "LC WVC", "St. Petersburg",
                 " ", "+79112257222", "", "+78123458675", " ", "test1"), true);
+        app.getContactHelper().submitContactCreation();
+        app.getContactHelper().returnToHomePage();
     }
 
 }

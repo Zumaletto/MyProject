@@ -31,7 +31,7 @@ public class ApplicationManager {
         } else if (browser.equals(BrowserType.IE)) {
             wd = new InternetExplorerDriver();
         }
-        //задерка воспроизведения автотестов
+//задерка воспроизведения автотестов
      /*   wd = new WebDriverDecorator<>() {
             public void beforeCall(Decorated<?> target, Method method, Object[] args) {
                 try {

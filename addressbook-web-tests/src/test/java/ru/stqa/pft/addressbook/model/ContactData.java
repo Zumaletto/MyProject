@@ -32,6 +32,7 @@ public class ContactData {
         this.group = group;
     }
 
+
     public String getFirstName() {
         return firstName;
     }
@@ -75,6 +76,7 @@ public class ContactData {
     public String getEmail() {
         return email;
     }
-    public String getGroup(){return group;}
+
+    public String getGroup() { return group; }
 
 }
