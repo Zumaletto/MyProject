@@ -10,8 +10,10 @@ public class ContactModificationTests extends TestBase {
         if (!app.getContactHelper().isThereContact()) {
             app.getNavigationHelper().gotoAddNewPage();
             app.getContactHelper().createContact();
+            app.getContactHelper().returnToHomePage();
+        } else {
+            app.getContactHelper().selectContact();
         }
-        app.getContactHelper().returnToHomePage();
         app.getContactHelper().selectContact();
         app.getContactHelper().initEditContact();
         app.getContactHelper().fillContactForm(
@@ -28,9 +30,11 @@ public class ContactModificationTests extends TestBase {
         if (!app.getContactHelper().isThereContact()) {
             app.getNavigationHelper().gotoAddNewPage();
             app.getContactHelper().createContact();
+            app.getContactHelper().returnToHomePage();
+            app.getContactHelper().selectContact();
+        } else {
+            app.getContactHelper().selectContact();
         }
-        app.getContactHelper().returnToHomePage();
-        app.getContactHelper().selectContact();
         app.getContactHelper().selectDetails();
         app.getContactHelper().selectModifiy();
         app.getContactHelper().fillContactForm(
@@ -47,9 +51,11 @@ public class ContactModificationTests extends TestBase {
         if (!app.getContactHelper().isThereContact()) {
             app.getNavigationHelper().gotoAddNewPage();
             app.getContactHelper().createContact();
+            app.getContactHelper().returnToHomePage();
+            app.getContactHelper().selectContact();
+        } else {
+            app.getContactHelper().selectContact();
         }
-        app.getContactHelper().returnToHomePage();
-        app.getContactHelper().selectContact();
         app.getContactHelper().selectDetails();
         app.getContactHelper().selectModifiy();
         app.getContactHelper().submitDeleteContact();
@@ -62,9 +68,11 @@ public class ContactModificationTests extends TestBase {
         if (!app.getContactHelper().isThereContact()) {
             app.getNavigationHelper().gotoAddNewPage();
             app.getContactHelper().createContact();
+            app.getContactHelper().returnToHomePage();
+            app.getContactHelper().selectContact();
+        } else {
+            app.getContactHelper().selectContact();
         }
-        app.getContactHelper().returnToHomePage();
-        app.getContactHelper().selectContact();
         app.getContactHelper().selectVcard();
     }
 
