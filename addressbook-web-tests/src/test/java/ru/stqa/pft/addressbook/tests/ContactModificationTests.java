@@ -17,9 +17,8 @@ public class ContactModificationTests extends TestBase {
         app.getContactHelper().selectContact();
         app.getContactHelper().initEditContact();
         app.getContactHelper().fillContactForm(
-                new ContactData("Elena", "Petrovna", "Dyeva",
-                        " ", " ", "Bolshaya Porokhovskaya str., 38, room 2, St. Petersburg, 19517",
-                        " ", "+79112222222", " ", " ", "1223@mail.ru", null), false);
+                new ContactData("Mary", " ", "Chernikova","Mary",
+                        "LC WVC", "St. Petersburg","+79112257222", "123@mail.ru"));
         app.getContactHelper().submitEditContact();
         app.getContactHelper().returnToHomePage();
     }
@@ -38,9 +37,8 @@ public class ContactModificationTests extends TestBase {
         app.getContactHelper().selectDetails();
         app.getContactHelper().selectModifiy();
         app.getContactHelper().fillContactForm(
-                new ContactData("First", " ", "Last",
-                        " ", " ", "Bolshaya Porokhovskaya str., 38, room 2, St. Petersburg, 19517",
-                        " ", "+79112222222", " ", " ", "1223@mail.ru", "test1"), false);
+                new ContactData("Mary", " ", "Chernikova","Mary",
+                        "LC WVC", "St. Petersburg","+79112257222", "123@mail.ru"));
         app.getContactHelper().submitEditContact();
         app.getContactHelper().returnToHomePage();
     }

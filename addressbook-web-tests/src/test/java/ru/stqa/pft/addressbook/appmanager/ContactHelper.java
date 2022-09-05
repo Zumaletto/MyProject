@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
+import ru.stqa.pft.addressbook.model.GroupData;
 
 public class ContactHelper extends HelperBase {
 
@@ -13,30 +14,26 @@ public class ContactHelper extends HelperBase {
     }
 
     public void createContact() {
-        fillContactForm(new ContactData("Mary", " ", "Chernikova",
-                "Mary", "LC WVC", "St. Petersburg",
-                " ", "+79112257222", "", "+78123458675", " ", "test1"), true);
+        fillContactForm(new ContactData("Mary", " ", "Chernikova","Mary",
+                "LC WVC", "St. Petersburg","+79112257222", "123@mail.ru"));
         submitContactCreation();
     }
 
-    public void fillContactForm(ContactData contactData, boolean creation) {
+    public void fillContactForm(ContactData contactData) {
         type(By.name("firstname"), contactData.getFirstName());
         type(By.name("middlename"), contactData.getMiddleName());
         type(By.name("lastname"), contactData.getLastName());
         type(By.name("nickname"), contactData.getNickName());
         type(By.name("company"), contactData.getNameOfCompany());
         type(By.name("address"), contactData.getAddress());
-        type(By.name("home"), contactData.getHomeTel());
         type(By.name("mobile"), contactData.getMobileTel());
-        type(By.name("work"), contactData.getWork_tel());
-        type(By.name("fax"), contactData.getFaxTel());
         type(By.name("email"), contactData.getEmail());
 //проверка условия пр  выборе группы
-        if (creation) {
+     /*   if (creation) {
             new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
         } else {
             Assert.assertFalse(isElementPresent(By.name("new_group")));
-        }
+        }*/
     }
 
     public void returnToHomePage() {
@@ -87,10 +84,10 @@ public class ContactHelper extends HelperBase {
         click(By.xpath("//form[2]/input[2]"));
     }
 
-
     public boolean isThereContact() {
         return isElementPresent(By.xpath("//input[@name='selected[]']"));
     }
+
 
   /*  public void createNextContact(ContactData contact, boolean status) {
         fillContactForm(contact, status);

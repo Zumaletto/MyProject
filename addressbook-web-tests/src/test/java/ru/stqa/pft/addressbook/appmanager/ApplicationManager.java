@@ -22,6 +22,9 @@ public class ApplicationManager {
         this.browser = browser;
     }
 
+    public ApplicationManager() {
+    }
+
     public void init() {
 
         if (browser.equals(BrowserType.CHROME)) {
