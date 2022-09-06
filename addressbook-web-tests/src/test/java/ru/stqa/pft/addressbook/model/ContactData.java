@@ -2,27 +2,16 @@ package ru.stqa.pft.addressbook.model;
 
 public class ContactData {
     private int id;
-    private final String firstName;
-    private final String middleName;
-    private final String lastName;
-    private final String nickName;
-    private final String nameOfCompany;
-    private final String address;
-    private final String mobileTel;
-    private final String email;
+    private  String firstName;
+    private  String middleName;
+    private  String lastName;
+    private  String nickName;
+    private  String nameOfCompany;
+    private  String address;
+    private  String mobileTel;
+    private  String email;
 
-    public ContactData(int id, String firstName, String middleName, String lastName, String nickName, String nameOfCompany,
-                       String address, String mobileTel, String email) {
-        this.id = id;
-        this.firstName = firstName;
-        this.middleName = middleName;
-        this.lastName = lastName;
-        this.nickName = nickName;
-        this.nameOfCompany = nameOfCompany;
-        this.address = address;
-        this.mobileTel = mobileTel;
-        this.email = email;
-    }
+
     public ContactData(String firstName, String middleName, String lastName, String nickName, String nameOfCompany,
                        String address, String mobileTel, String email) {
         this.id = Integer.MAX_VALUE;
@@ -35,7 +24,16 @@ public class ContactData {
         this.mobileTel = mobileTel;
         this.email = email;
     }
-    public  int getId(){
+
+    public ContactData(String firstName, String lastName, String address, String mobileTel, String email) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.mobileTel = mobileTel;
+        this.email = email;
+    }
+
+    public int getId() {
         return id;
     }
 
@@ -74,6 +72,7 @@ public class ContactData {
     public String getEmail() {
         return email;
     }
+
 
     @Override
     public String toString() {

@@ -1,7 +1,10 @@
 package ru.stqa.pft.addressbook.tests;
 
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
+
+import java.util.List;
 
 public class ContactModificationTests extends TestBase {
     @Test
@@ -11,16 +14,19 @@ public class ContactModificationTests extends TestBase {
             app.getNavigationHelper().gotoAddNewPage();
             app.getContactHelper().createContact();
             app.getContactHelper().returnToHomePage();
-        } else {
-            app.getContactHelper().selectContact();
         }
-        app.getContactHelper().selectContact();
+        List<ContactData> before = app.getContactHelper().getContactList();
+        app.getContactHelper().selectContact(before.size()- 1);
         app.getContactHelper().initEditContact();
         app.getContactHelper().fillContactForm(
-                new ContactData("Mary", " ", "Chernikova","Mary",
-                        "LC WVC", "St. Petersburg","+79112257222", "123@mail.ru"));
+                new ContactData("Mary", " ", "Chernikova", "Mary",
+                        "LC WVC", "St. Petersburg", "+79112257222", "123@mail.ru"));
         app.getContactHelper().submitEditContact();
         app.getContactHelper().returnToHomePage();
+
+        List<ContactData> after = app.getContactHelper().getContactList();
+        Assert.assertEquals(after.size(), before.size());
+
     }
 
     @Test
@@ -30,17 +36,19 @@ public class ContactModificationTests extends TestBase {
             app.getNavigationHelper().gotoAddNewPage();
             app.getContactHelper().createContact();
             app.getContactHelper().returnToHomePage();
-            app.getContactHelper().selectContact();
-        } else {
-            app.getContactHelper().selectContact();
         }
+        List<ContactData> before = app.getContactHelper().getContactList();
+        app.getContactHelper().selectContact(before.size() - 1);
         app.getContactHelper().selectDetails();
         app.getContactHelper().selectModifiy();
         app.getContactHelper().fillContactForm(
-                new ContactData("Mary", " ", "Chernikova","Mary",
-                        "LC WVC", "St. Petersburg","+79112257222", "123@mail.ru"));
+                new ContactData("Mary", " ", "Chernikova", "Mary",
+                        "LC WVC", "St. Petersburg", "+79112257222", "123@mail.ru"));
         app.getContactHelper().submitEditContact();
         app.getContactHelper().returnToHomePage();
+
+        List<ContactData> after = app.getContactHelper().getContactList();
+        Assert.assertEquals(after.size(), before.size());
     }
 
     @Test
@@ -50,14 +58,16 @@ public class ContactModificationTests extends TestBase {
             app.getNavigationHelper().gotoAddNewPage();
             app.getContactHelper().createContact();
             app.getContactHelper().returnToHomePage();
-            app.getContactHelper().selectContact();
-        } else {
-            app.getContactHelper().selectContact();
         }
+        List<ContactData> before = app.getContactHelper().getContactList();
+        app.getContactHelper().selectContact(0);
         app.getContactHelper().selectDetails();
         app.getContactHelper().selectModifiy();
         app.getContactHelper().submitDeleteContact();
         app.getNavigationHelper().gotoHomePage();
+
+        List<ContactData> after = app.getContactHelper().getContactList();
+        Assert.assertEquals(after.size(), before.size() - 1);
     }
 
     @Test
@@ -67,11 +77,13 @@ public class ContactModificationTests extends TestBase {
             app.getNavigationHelper().gotoAddNewPage();
             app.getContactHelper().createContact();
             app.getContactHelper().returnToHomePage();
-            app.getContactHelper().selectContact();
-        } else {
-            app.getContactHelper().selectContact();
         }
+        List<ContactData> before = app.getContactHelper().getContactList();
+        app.getContactHelper().selectContact(0);
         app.getContactHelper().selectVcard();
+
+        List<ContactData> after = app.getContactHelper().getContactList();
+        Assert.assertEquals(after.size(), before.size());
     }
 
 }

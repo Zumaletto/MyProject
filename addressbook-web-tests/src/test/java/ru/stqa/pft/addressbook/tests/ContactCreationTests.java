@@ -4,22 +4,28 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 
+import java.util.List;
+
 public class ContactCreationTests extends TestBase {
 
     @Test
     public void testContactCreation() throws Exception {
+        app.getNavigationHelper().gotoHomePage();
+        List<ContactData> before = app.getContactHelper().getContactList();
+
         app.getNavigationHelper().gotoAddNewPage();
-        int before = app.getContactHelper().getContactCount();
         app.getContactHelper().createContact();
         app.getContactHelper().returnToHomePage();
-        int after = app.getContactHelper().getContactCount();
-        Assert.assertEquals(after, before + 1);
+
+        List<ContactData> after = app.getContactHelper().getContactList();
+        Assert.assertEquals(after.size(), before.size() + 1);
     }
 
     @Test
     public void testAddNextContact() {
+        app.getNavigationHelper().gotoHomePage();
+        List<ContactData> before = app.getContactHelper().getContactList();
         app.getNavigationHelper().gotoAddNewPage();
-        int before = app.getContactHelper().getContactCount();
         app.getContactHelper().createContact();
         app.getNavigationHelper().gotoAddNext();
         app.getContactHelper().fillContactForm(
@@ -27,9 +33,9 @@ public class ContactCreationTests extends TestBase {
                         "LC WVC", "St. Petersburg", "+79112257222", "123@mail.ru"));
         app.getContactHelper().submitContactCreation();
         app.getContactHelper().returnToHomePage();
-        int after = app.getContactHelper().getContactCount();
 
-        Assert.assertEquals(after, before + 2);
+        List<ContactData> after = app.getContactHelper().getContactList();
+        Assert.assertEquals(after.size(), before.size() + 2);
     }
 
 }
