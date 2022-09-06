@@ -2,10 +2,7 @@ package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.Select;
-import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
-import ru.stqa.pft.addressbook.model.GroupData;
 
 public class ContactHelper extends HelperBase {
 
@@ -14,8 +11,8 @@ public class ContactHelper extends HelperBase {
     }
 
     public void createContact() {
-        fillContactForm(new ContactData("Mary", " ", "Chernikova","Mary",
-                "LC WVC", "St. Petersburg","+79112257222", "123@mail.ru"));
+        fillContactForm(new ContactData("Mary", " ", "Chernikova", "Mary",
+                "LC WVC", "St. Petersburg", "+79112257222", "123@mail.ru"));
         submitContactCreation();
     }
 
@@ -46,6 +43,7 @@ public class ContactHelper extends HelperBase {
 
     public void selectContact() {
         //click(By.xpath("//input[@name='selected[]']"));
+        //click(By.cssSelector("[class=center] input"));
         click(By.xpath("//td/input"));
 
     }
@@ -73,7 +71,6 @@ public class ContactHelper extends HelperBase {
     public void selectVcard() {
         //click(By.xpath("//table[@id='maintable']/tbody/tr[8]/td[9]/a/img"));
         click(By.xpath("//img[@alt='vCard']"));
-
     }
 
     public void selectModifiy() {
@@ -88,10 +85,13 @@ public class ContactHelper extends HelperBase {
         return isElementPresent(By.xpath("//input[@name='selected[]']"));
     }
 
+    public int getContactCount() {
+        return wd.findElements(By.cssSelector("[class='center'] input")).size();
+    }
+
 
   /*  public void createNextContact(ContactData contact, boolean status) {
         fillContactForm(contact, status);
         submitContactCreation();
     }*/
 }
-
