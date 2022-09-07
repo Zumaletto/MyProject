@@ -4,6 +4,8 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 
@@ -13,7 +15,8 @@ public class ContactModificationTests extends TestBase {
         app.getNavigationHelper().gotoHomePage();
         if (!app.getContactHelper().isThereContact()) {
             app.getNavigationHelper().gotoAddNewPage();
-            app.getContactHelper().createContact(new ContactData("Alena", null, null, null, null));
+            app.getContactHelper().createContact(new ContactData(
+                    "Alena", null, null, null, null));
             app.getContactHelper().returnToHomePage();
         }
         List<ContactData> before = app.getContactHelper().getContactList();
@@ -30,7 +33,11 @@ public class ContactModificationTests extends TestBase {
 
         before.remove(before.size() - 1);
         before.add(contact);
-        Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
+
+        Comparator<? super ContactData> byId = (c1,c2) -> Integer.compare(c1.getId(), c2.getId());
+        before.sort(byId);
+        after.sort(byId);
+        Assert.assertEquals(before, after);
 
     }
 
@@ -39,7 +46,8 @@ public class ContactModificationTests extends TestBase {
         app.getNavigationHelper().gotoHomePage();
         if (!app.getContactHelper().isThereContact()) {
             app.getNavigationHelper().gotoAddNewPage();
-            app.getContactHelper().createContact(new ContactData("Alena", null, null, null, null));
+            app.getContactHelper().createContact(new ContactData(
+                    "Alena", null, null, null, null));
             app.getContactHelper().returnToHomePage();
         }
         List<ContactData> before = app.getContactHelper().getContactList();
@@ -58,6 +66,11 @@ public class ContactModificationTests extends TestBase {
         before.remove(before.size() - 1);
         before.add(contact);
         Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
+
+        Comparator<? super ContactData> byId = (c1,c2) -> Integer.compare(c1.getId(), c2.getId());
+        before.sort(byId);
+        after.sort(byId);
+        Assert.assertEquals(before, after);
     }
 
     @Test
@@ -65,7 +78,8 @@ public class ContactModificationTests extends TestBase {
         app.getNavigationHelper().gotoHomePage();
         if (!app.getContactHelper().isThereContact()) {
             app.getNavigationHelper().gotoAddNewPage();
-            app.getContactHelper().createContact(new ContactData("Alena", null, null, null, null));
+            app.getContactHelper().createContact(new ContactData(
+                    "Alena", null, null, null, null));
             app.getContactHelper().returnToHomePage();
         }
         List<ContactData> before = app.getContactHelper().getContactList();
@@ -80,6 +94,11 @@ public class ContactModificationTests extends TestBase {
 
         before.remove(before.size() - 1);
         Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
+
+        Comparator<? super ContactData> byId = (c1,c2) -> Integer.compare(c1.getId(), c2.getId());
+        before.sort(byId);
+        after.sort(byId);
+        Assert.assertEquals(before, after);
     }
 
     @Test
@@ -87,7 +106,8 @@ public class ContactModificationTests extends TestBase {
         app.getNavigationHelper().gotoHomePage();
         if (!app.getContactHelper().isThereContact()) {
             app.getNavigationHelper().gotoAddNewPage();
-            app.getContactHelper().createContact(new ContactData("Alena", null, null, null, null));
+            app.getContactHelper().createContact(new ContactData(
+                    "Alena", null, null, null, null));
             app.getContactHelper().returnToHomePage();
         }
         List<ContactData> before = app.getContactHelper().getContactList();

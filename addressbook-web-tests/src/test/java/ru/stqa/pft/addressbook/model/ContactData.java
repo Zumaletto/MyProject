@@ -12,7 +12,7 @@ public class ContactData {
     private  String email;
 
     public ContactData( String firstName, String lastName, String address, String mobileTel, String email) {
-        this.id = 0;
+        this.id = Integer.MAX_VALUE;
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
