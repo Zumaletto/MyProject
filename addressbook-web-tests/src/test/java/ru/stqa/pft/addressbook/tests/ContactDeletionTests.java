@@ -9,11 +9,11 @@ import java.util.List;
 public class ContactDeletionTests extends TestBase {
 
     @Test
-    public void testContactDeletionO() throws Exception {
+    public void testContactDeletion() throws Exception {
         app.getNavigationHelper().gotoHomePage();
         if (!app.getContactHelper().isThereContact()) {
             app.getNavigationHelper().gotoAddNewPage();
-            app.getContactHelper().createContact();
+            app.getContactHelper().createContact(new ContactData("Alena", null, null, null, null));
             app.getContactHelper().returnToHomePage();
         }
         List<ContactData> before = app.getContactHelper().getContactList();
@@ -23,9 +23,10 @@ public class ContactDeletionTests extends TestBase {
         app.getNavigationHelper().gotoHomePage();
 
         List<ContactData> after = app.getContactHelper().getContactList();
-        Assert.assertEquals(after, before.size() - 1);
+        Assert.assertEquals(after.size(), before.size() - 1);
 
-    }
-
+        before.remove(before.size() - 1);
+        Assert.assertEquals(before, after);
+  }
 
 }

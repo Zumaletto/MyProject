@@ -14,7 +14,7 @@ public class ContactCreationTests extends TestBase {
         List<ContactData> before = app.getContactHelper().getContactList();
 
         app.getNavigationHelper().gotoAddNewPage();
-        app.getContactHelper().createContact();
+        app.getContactHelper().createContact(new ContactData("Alena", null, null, null, null));
         app.getContactHelper().returnToHomePage();
 
         List<ContactData> after = app.getContactHelper().getContactList();
@@ -26,11 +26,11 @@ public class ContactCreationTests extends TestBase {
         app.getNavigationHelper().gotoHomePage();
         List<ContactData> before = app.getContactHelper().getContactList();
         app.getNavigationHelper().gotoAddNewPage();
-        app.getContactHelper().createContact();
+        app.getContactHelper().createContact(new ContactData("Alena", null, null, null, null));
         app.getNavigationHelper().gotoAddNext();
         app.getContactHelper().fillContactForm(
-                new ContactData("Elena", "Ivanovna", "Chernikova", "Mary",
-                        "LC WVC", "St. Petersburg", "+79112257222", "123@mail.ru"));
+                new ContactData("Liza", "Semenovich",
+                        "St. Petersburg", "+79112257222", "123@mail.ru"));
         app.getContactHelper().submitContactCreation();
         app.getContactHelper().returnToHomePage();
 

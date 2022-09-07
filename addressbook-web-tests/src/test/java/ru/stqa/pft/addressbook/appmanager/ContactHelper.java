@@ -14,9 +14,8 @@ public class ContactHelper extends HelperBase {
         super(wd);
     }
 
-    public void createContact() {
-        fillContactForm(new ContactData("Mary", " ", "Chernikova", "Mary",
-                "LC WVC", "St. Petersburg", "+79112257222", "123@mail.ru"));
+    public void createContact(ContactData contact) {
+        fillContactForm(contact);
         submitContactCreation();
     }
 
@@ -95,12 +94,13 @@ public class ContactHelper extends HelperBase {
         List<WebElement> elements = wd.findElements(By.cssSelector("tr[name=entry]"));
         for (WebElement element : elements) {
             List<WebElement> data = element.findElements(By.tagName("td"));
-            String lastName = data.get(1).getText();
-            String firstName = data.get(2).getText();
+            String firstName = data.get(1).getText();
+            String lastName = data.get(2).getText();
             String address = data.get(3).getText();
-            String email = data.get(4).getText();
-            String phones = data.get(5).getText();
-            ContactData contact = new ContactData(lastName, firstName, address, email, phones);
+            String phones = data.get(4).getText();
+            String email= data.get(5).getText();
+            String id = element.findElement(By.tagName("input")).getAttribute("value");
+            ContactData contact = new ContactData(id, lastName, firstName, address, email, phones);
             contacts.add(contact);
         }
         return contacts;
