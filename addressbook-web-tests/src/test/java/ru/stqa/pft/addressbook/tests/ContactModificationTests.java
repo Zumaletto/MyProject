@@ -18,7 +18,7 @@ public class ContactModificationTests extends TestBase {
         }
         List<ContactData> before = app.getContactHelper().getContactList();
         app.getContactHelper().selectContact(before.size() - 1);
-        app.getContactHelper().initEditContact();
+        app.getContactHelper().initEditContact(before.size() - 1);
         ContactData contact = new ContactData(before.get(before.size() - 1).getId(),
                 "OLga", "Elovich", "St. Petersburg", "+79112257222", "123@mail.ru");
         app.getContactHelper().fillContactForm(contact);
@@ -44,10 +44,10 @@ public class ContactModificationTests extends TestBase {
         }
         List<ContactData> before = app.getContactHelper().getContactList();
         app.getContactHelper().selectContact(before.size() - 1);
-        app.getContactHelper().selectDetails();
+        app.getContactHelper().selectDetails(before.size() - 1);
         app.getContactHelper().selectModifiy();
         ContactData contact = new ContactData(before.get(before.size() - 1).getId(),
-                "Mary", "Chernikova", "St. Petersburg", "+79112257222", "123@mail.ru");
+                "Mira", "Iva", "Moscow", "+79112257222", "123@mail.ru");
         app.getContactHelper().fillContactForm(contact);
         app.getContactHelper().submitEditContact();
         app.getContactHelper().returnToHomePage();
@@ -70,7 +70,7 @@ public class ContactModificationTests extends TestBase {
         }
         List<ContactData> before = app.getContactHelper().getContactList();
         app.getContactHelper().selectContact(before.size() - 1);
-        app.getContactHelper().selectDetails();
+        app.getContactHelper().selectDetails(before.size() - 1);
         app.getContactHelper().selectModifiy();
         app.getContactHelper().submitDeleteContact();
         app.getNavigationHelper().gotoHomePage();
@@ -89,8 +89,8 @@ public class ContactModificationTests extends TestBase {
             app.getContactHelper().returnToHomePage();
         }
         List<ContactData> before = app.getContactHelper().getContactList();
-        app.getContactHelper().selectContact(0);
-        app.getContactHelper().selectVcard();
+        app.getContactHelper().selectContact(before.size() - 1);
+        app.getContactHelper().selectVcard(before.size() - 1);
 
         List<ContactData> after = app.getContactHelper().getContactList();
         Assert.assertEquals(after.size(), before.size());

@@ -56,21 +56,21 @@ public class ContactHelper extends HelperBase {
         wd.switchTo().alert().accept();
     }
 
-    public void initEditContact() {
-        click(By.xpath("//img[@alt='Edit']"));
+    public void initEditContact(int index) {
+
+        wd.findElements(By.xpath("//img[@alt='Edit']")).get(index).click();
     }
 
     public void submitEditContact() {
         click(By.name("update"));
     }
 
-    public void selectDetails() {
-        click(By.xpath("//img[@alt='Details']"));
+    public void selectDetails(int index) {
+        wd.findElements(By.xpath("//img[@alt='Details']")).get(index).click();
     }
 
-    public void selectVcard() {
-        //click(By.xpath("//table[@id='maintable']/tbody/tr[8]/td[9]/a/img"));
-        click(By.xpath("//img[@alt='vCard']"));
+    public void selectVcard(int index) {
+        wd.findElements(By.xpath("//img[@alt='vCard']")).get(index).click();
     }
 
     public void selectModifiy() {
@@ -98,7 +98,7 @@ public class ContactHelper extends HelperBase {
             String lastName = data.get(2).getText();
             String address = data.get(3).getText();
             String phones = data.get(4).getText();
-            String email= data.get(5).getText();
+            String email = data.get(5).getText();
             String id = element.findElement(By.tagName("input")).getAttribute("value");
             ContactData contact = new ContactData(id, lastName, firstName, address, email, phones);
             contacts.add(contact);
