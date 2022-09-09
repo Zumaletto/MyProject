@@ -20,20 +20,11 @@ public class ContactHelper extends HelperBase {
     }
 
     public void fillContactForm(ContactData contactData) {
-        type(By.name("firstname"), contactData.getFirstName());
-        type(By.name("middlename"), contactData.getMiddleName());
         type(By.name("lastname"), contactData.getLastName());
-        type(By.name("nickname"), contactData.getNickName());
-        type(By.name("company"), contactData.getNameOfCompany());
+        type(By.name("firstname"), contactData.getFirstName());
         type(By.name("address"), contactData.getAddress());
-        type(By.name("mobile"), contactData.getMobileTel());
         type(By.name("email"), contactData.getEmail());
-//проверка условия пр  выборе группы
-     /*   if (creation) {
-            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
-        } else {
-            Assert.assertFalse(isElementPresent(By.name("new_group")));
-        }*/
+        type(By.name("mobile"), contactData.getMobileTel());
     }
 
     public void returnToHomePage() {
@@ -85,20 +76,16 @@ public class ContactHelper extends HelperBase {
         return isElementPresent(By.xpath("//input[@name='selected[]']"));
     }
 
-    public int getContactCount() {
-        return wd.findElements(By.cssSelector("[class='center'] input")).size();
-    }
-
     public List<ContactData> getContactList() {
         List<ContactData> contacts = new ArrayList<ContactData>();
         List<WebElement> elements = wd.findElements(By.cssSelector("tr[name=entry]"));
         for (WebElement element : elements) {
             List<WebElement> data = element.findElements(By.tagName("td"));
-            String firstName = data.get(1).getText();
-            String lastName = data.get(2).getText();
+            String lastName = data.get(1).getText();
+            String firstName = data.get(2).getText();
             String address = data.get(3).getText();
-            String phones = data.get(4).getText();
-            String email = data.get(5).getText();
+            String email = data.get(4).getText();
+            String phones = data.get(5).getText();
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
             ContactData contact = new ContactData(id, lastName, firstName, address, email, phones);
             contacts.add(contact);

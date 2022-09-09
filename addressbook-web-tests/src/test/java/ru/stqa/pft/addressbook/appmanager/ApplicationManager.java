@@ -25,9 +25,6 @@ public class ApplicationManager {
         this.browser = browser;
     }
 
-    public ApplicationManager() {
-    }
-
     public void init() {
 
         if (browser.equals(BrowserType.CHROME)) {
@@ -38,7 +35,7 @@ public class ApplicationManager {
             wd = new InternetExplorerDriver();
         }
 //задерка воспроизведения автотестов
-   /*   wd = new WebDriverDecorator<>() {
+  /*   wd = new WebDriverDecorator<>() {
             public void beforeCall(Decorated<?> target, Method method, Object[] args) {
                 try {
                     Thread.sleep(500);

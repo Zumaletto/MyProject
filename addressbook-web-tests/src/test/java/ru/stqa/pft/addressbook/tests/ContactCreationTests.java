@@ -17,7 +17,7 @@ public class ContactCreationTests extends TestBase {
 
         app.getNavigationHelper().gotoAddNewPage();
         ContactData contact = new ContactData(
-                "Oleg", "Klichko", "Litva", "+1234587", "123@mail.ru");
+                "Petrov", "Anton", "Litva", "123@mail.ru", "+79217777777");
         app.getContactHelper().createContact(contact);
         app.getContactHelper().returnToHomePage();
 
@@ -41,11 +41,11 @@ public class ContactCreationTests extends TestBase {
 
         app.getNavigationHelper().gotoAddNewPage();
         ContactData contact = new ContactData(
-                "Alex", "Lecenko", "Litva", "+1234587", "123@mail.ru");
+                "Pupkin", "Alex", "St.Peterburg", "123@mail.ru", "+79217771477");
         app.getContactHelper().createContact(contact);
         app.getNavigationHelper().gotoAddNext();
         ContactData contactNext = new ContactData(
-                "Liza", "Semenovich","St. Petersburg", "+79112257222", "123@mail.ru");
+                "Ivanova", "Olga", "Riga", "123@mail.ru", "+79217788777");
         app.getContactHelper().fillContactForm(contactNext);
         app.getContactHelper().submitContactCreation();
         app.getContactHelper().returnToHomePage();
