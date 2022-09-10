@@ -10,18 +10,18 @@ import java.util.List;
 
 public class ContactCreationTests extends TestBase {
 
-    @Test
+    @Test(enabled = true)
     public void testContactCreation() throws Exception {
-        app.getNavigationHelper().gotoHomePage();
-        List<ContactData> before = app.getContactHelper().getContactList();
+        app.goTo().homePage();
+        List<ContactData> before = app.contact().list();
 
-        app.getNavigationHelper().gotoAddNewPage();
+        app.goTo().addNewPage();
         ContactData contact = new ContactData(
                 "Petrov", "Anton", "Litva", "123@mail.ru", "+79217777777");
-        app.getContactHelper().createContact(contact);
-        app.getContactHelper().returnToHomePage();
+        app.contact().create(contact);
+        app.contact().returnToHomePage();
 
-        List<ContactData> after = app.getContactHelper().getContactList();
+        List<ContactData> after = app.contact().list();
         Assert.assertEquals(after.size(), before.size() + 1);
 
         contact.setId(after.stream().max((o1, o2) -> Integer.compare(o1.getId(), o2.getId())).get().getId());
@@ -34,23 +34,22 @@ public class ContactCreationTests extends TestBase {
         Assert.assertEquals(before, after);
     }
 
-    @Test
+    @Test(enabled = true)
     public void testAddNextContact() {
-        app.getNavigationHelper().gotoHomePage();
-        List<ContactData> before = app.getContactHelper().getContactList();
+        app.goTo().homePage();
+        List<ContactData> before = app.contact().list();
 
-        app.getNavigationHelper().gotoAddNewPage();
+        app.goTo().addNewPage();
         ContactData contact = new ContactData(
                 "Pupkin", "Alex", "St.Peterburg", "123@mail.ru", "+79217771477");
-        app.getContactHelper().createContact(contact);
-        app.getNavigationHelper().gotoAddNext();
+        app.contact().create(contact);
+        app.goTo().addNextContact();
         ContactData contactNext = new ContactData(
                 "Ivanova", "Olga", "Riga", "123@mail.ru", "+79217788777");
-        app.getContactHelper().fillContactForm(contactNext);
-        app.getContactHelper().submitContactCreation();
-        app.getContactHelper().returnToHomePage();
+        app.contact().create(contactNext);
+        app.contact().returnToHomePage();
 
-        List<ContactData> after = app.getContactHelper().getContactList();
+        List<ContactData> after = app.contact().list();
         Assert.assertEquals(after.size(), before.size() + 2);
     }
 

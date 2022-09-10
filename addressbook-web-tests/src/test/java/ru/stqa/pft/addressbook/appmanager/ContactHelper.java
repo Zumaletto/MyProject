@@ -14,9 +14,44 @@ public class ContactHelper extends HelperBase {
         super(wd);
     }
 
-    public void createContact(ContactData contact) {
+    public void createFirstContact() {
+        create(new ContactData(
+                "Semenovich", "Anna", null, null, null));
+        returnToHomePage();
+    }
+
+    public void create(ContactData contact) {
         fillContactForm(contact);
         submitContactCreation();
+    }
+
+    public void createEdit(ContactData contact) {
+        fillContactForm(contact);
+        submitEditContact();
+    }
+
+    public void delete(int index) {
+        select(index);
+        deleteContact();
+        closePopUp();
+    }
+
+    public void edit(int index) {
+        select(index);
+        clickEdit(index);
+    }
+
+    public void seeDetailsForEdit(int index) {
+        select(index);
+        selectDetails(index);
+        selectModify();
+    }
+
+    public void seeDetailsForDelete(int index) {
+        select(index);
+        selectDetails(index);
+        selectModify();
+        submitDeleteContact();
     }
 
     public void fillContactForm(ContactData contactData) {
@@ -28,14 +63,14 @@ public class ContactHelper extends HelperBase {
     }
 
     public void returnToHomePage() {
-        click(By.linkText("home page"));
+        click(By.linkText("home"));
     }
 
     public void submitContactCreation() {
         click(By.xpath("//div[@id='content']/form/input[21]"));
     }
 
-    public void selectContact(int index) {
+    public void select(int index) {
         wd.findElements(By.cssSelector("[class='center'] input")).get(index).click();
     }
 
@@ -47,7 +82,7 @@ public class ContactHelper extends HelperBase {
         wd.switchTo().alert().accept();
     }
 
-    public void initEditContact(int index) {
+    public void clickEdit(int index) {
 
         wd.findElements(By.xpath("//img[@alt='Edit']")).get(index).click();
     }
@@ -64,7 +99,7 @@ public class ContactHelper extends HelperBase {
         wd.findElements(By.xpath("//img[@alt='vCard']")).get(index).click();
     }
 
-    public void selectModifiy() {
+    public void selectModify() {
         click(By.name("modifiy"));
     }
 
@@ -72,11 +107,7 @@ public class ContactHelper extends HelperBase {
         click(By.xpath("//form[2]/input[2]"));
     }
 
-    public boolean isThereContact() {
-        return isElementPresent(By.xpath("//input[@name='selected[]']"));
-    }
-
-    public List<ContactData> getContactList() {
+    public List<ContactData> list() {
         List<ContactData> contacts = new ArrayList<ContactData>();
         List<WebElement> elements = wd.findElements(By.cssSelector("tr[name=entry]"));
         for (WebElement element : elements) {
