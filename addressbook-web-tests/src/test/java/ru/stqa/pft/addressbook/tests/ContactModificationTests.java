@@ -26,8 +26,9 @@ public class ContactModificationTests extends TestBase {
         List<ContactData> before = app.contact().list();
         int index = before.size() - 1;
         app.contact().edit(index);
-        ContactData contact = new ContactData(before.get(index).getId(),
-                "Loto", "Igor", "St.Peterburg", "12783@mail.ru", "+79217771437");
+        ContactData contact = new ContactData()
+                .withId(before.get(index).getId()).withLastName("Loto").withFirstName("Igor").withAddress("St.Peterburg")
+                .withEmail("12783@mail.ru").withMobileTel("+79217771437");
         app.contact().createEdit(contact);
         app.contact().returnToHomePage();
 
@@ -50,8 +51,9 @@ public class ContactModificationTests extends TestBase {
         List<ContactData> before = app.contact().list();
         int index = before.size() - 1;
         app.contact().seeDetailsForEdit(index);
-        ContactData contact = new ContactData(before.get(index).getId(),
-                "Vip", "Andrey", "Minsk", "123@mail.ru", "+79217771477");
+        ContactData contact = new ContactData()
+                .withId(before.get(index).getId()).withLastName("Vip").withFirstName("Andrey").withAddress("Minsk")
+                .withEmail("123@mail.ru").withMobileTel("+79217771477");
         app.contact().createEdit(contact);
         app.contact().returnToHomePage();
 
