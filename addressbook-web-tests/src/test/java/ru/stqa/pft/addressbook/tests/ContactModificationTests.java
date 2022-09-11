@@ -4,8 +4,12 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
+import ru.stqa.pft.addressbook.model.Contacts;
 
 import java.util.Set;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.testng.Assert.assertEquals;
 
 public class ContactModificationTests extends TestBase {
 
@@ -21,7 +25,7 @@ public class ContactModificationTests extends TestBase {
     @Test(enabled = true)
     public void testEditContact() {
 
-        Set<ContactData> before = app.contact().all();
+        Contacts before = app.contact().all();
         ContactData deletedContact = before.iterator().next();
         app.contact().edit(deletedContact);
         ContactData contact = new ContactData()
@@ -29,20 +33,17 @@ public class ContactModificationTests extends TestBase {
                 .withEmail("12783@mail.ru").withMobileTel("+79217771437");
         app.contact().createEdit(contact);
         app.contact().returnToHomePage();
+        Contacts after = app.contact().all();
+        assertEquals(after.size(), before.size());
+        assertThat(after, equalTo(before.withOut(deletedContact).withAdded(contact)));
 
-        Set<ContactData> after = app.contact().all();
-        Assert.assertEquals(after.size(), before.size());
-
-        before.remove(deletedContact);
-        before.add(contact);
-        Assert.assertEquals(before, after);
 
     }
 
     @Test(enabled = true)
     public void testSelectDetailsToEditContact() {
 
-        Set<ContactData> before = app.contact().all();
+        Contacts before = app.contact().all();
         ContactData deletedContact = before.iterator().next();
         app.contact().seeDetailsForEdit(deletedContact);
         ContactData contact = new ContactData()
@@ -51,49 +52,37 @@ public class ContactModificationTests extends TestBase {
         app.contact().createEdit(contact);
         app.contact().returnToHomePage();
 
-        Set<ContactData> after = app.contact().all();
-        Assert.assertEquals(after.size(), before.size());
-
-        before.remove(deletedContact);
-        before.add(contact);
-        Assert.assertEquals(before, after);
+        Contacts after = app.contact().all();
+        assertEquals(after.size(), before.size());
+        assertThat(after, equalTo(before.withOut(deletedContact).withAdded(contact)));
     }
 
 
     @Test(enabled = true)
     public void testSelectDetailsToDeleteContact() {
 
-        Set<ContactData> before = app.contact().all();
+        Contacts before = app.contact().all();
         ContactData deletedContact = before.iterator().next();
         app.contact().seeDetailsForDelete(deletedContact);
         app.goTo().homePage();
 
-        Set<ContactData> after = app.contact().all();
-        Assert.assertEquals(after.size(), before.size() - 1);
-
-        before.remove(deletedContact);
-        Assert.assertEquals(before, after);
+        Contacts after = app.contact().all();
+        assertEquals(after.size(), before.size() - 1);
+        assertThat(after, equalTo(before.withOut(deletedContact)));
     }
 
 
     @Test(enabled = true)
     public void testSelectVcardToDownload() {
 
-        Set<ContactData> before = app.contact().all();
+        Contacts before = app.contact().all();
         ContactData deletedContact = before.iterator().next();
         app.contact().selectContactById(deletedContact.getId());
         app.contact().selectVcard(deletedContact.getId());
 
-        Set<ContactData> after = app.contact().all();
-        Assert.assertEquals(before, after);
+        Contacts after = app.contact().all();
+        assertEquals(before, after);
 
-       /* List<ContactData> before = app.contact().list();
-        int index = before.size() - 1;
-        app.contact().select(index);
-        app.contact().selectVcard(index);
-
-        Set<ContactData> after = app.contact().all();
-        Assert.assertEquals(after.size(), before.size());*/
     }
 
 }

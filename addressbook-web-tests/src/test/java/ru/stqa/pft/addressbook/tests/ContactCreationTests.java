@@ -1,34 +1,35 @@
 package ru.stqa.pft.addressbook.tests;
 
-import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
+import ru.stqa.pft.addressbook.model.Contacts;
 
-import java.util.Set;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.testng.Assert.assertEquals;
 
 public class ContactCreationTests extends TestBase {
 
     @Test(enabled = true)
     public void testContactCreation() throws Exception {
         app.goTo().homePage();
-        Set<ContactData> before = app.contact().all();
+        Contacts before = app.contact().all();
         app.goTo().addNewPage();
         ContactData contact = new ContactData()
                 .withLastName("Petrov").withFirstName("Anton").withAddress("Litva").withEmail("123@mail.ru").withMobileTel("+79217777777");
         app.contact().create(contact);
         app.contact().returnToHomePage();
-        Set<ContactData> after = app.contact().all();
-        Assert.assertEquals(after.size(), before.size() + 1);
-        contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt());
+        Contacts after = app.contact().all();
+        assertEquals(after.size(), before.size() + 1);
+        assertThat(after, equalTo(before.withAdded(
+                contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
 
-        before.add(contact);
-        Assert.assertEquals(before, after);
     }
 
     @Test(enabled = true)
     public void testAddNextContact() {
         app.goTo().homePage();
-        Set<ContactData> before = app.contact().all();
+        Contacts before = app.contact().all();
         app.goTo().addNewPage();
         ContactData contact = new ContactData()
                 .withLastName("Pupkin").withFirstName("Alex").withAddress("St.Peterburg").withEmail("123@mail.ru").withMobileTel("+79217771477");
@@ -38,8 +39,8 @@ public class ContactCreationTests extends TestBase {
                 .withLastName("Ivanova").withFirstName("Olga").withAddress("Riga").withEmail("123@mail.ru").withMobileTel("+79217788777");
         app.contact().create(contactNext);
         app.contact().returnToHomePage();
-        Set<ContactData> after = app.contact().all();
-        Assert.assertEquals(after.size(), before.size() + 2);
+        Contacts after = app.contact().all();
+        assertEquals(after.size(), before.size() + 2);
 
     }
 
