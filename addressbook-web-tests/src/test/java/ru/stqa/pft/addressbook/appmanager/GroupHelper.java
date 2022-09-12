@@ -13,6 +13,8 @@ import java.util.Set;
 
 public class GroupHelper extends HelperBase {
 
+
+
     public GroupHelper(WebDriver wd) {
         super(wd);
     }
@@ -75,8 +77,11 @@ public class GroupHelper extends HelperBase {
         returnToGroupPage();
     }
 
-    private Groups groupCache = null;
+    public int count(){
+        return wd.findElements(By.name("selected[]")).size();
+    }
 
+    private Groups groupCache = null;
 
     public Groups all() {
         if(groupCache != null){

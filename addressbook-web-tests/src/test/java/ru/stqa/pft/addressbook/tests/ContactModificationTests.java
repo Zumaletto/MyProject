@@ -31,8 +31,8 @@ public class ContactModificationTests extends TestBase {
                 .withEmail("12783@mail.ru").withMobileTel("+79217771437");
         app.contact().createEdit(contact);
         app.contact().returnToHomePage();
+        assertThat(app.contact().count(), equalTo(before.size()));
         Contacts after = app.contact().all();
-        assertEquals(after.size(), before.size());
         assertThat(after, equalTo(before.withOut(deletedContact).withAdded(contact)));
 
 
@@ -49,9 +49,8 @@ public class ContactModificationTests extends TestBase {
                 .withEmail("123@mail.ru").withMobileTel("+79217771477");
         app.contact().createEdit(contact);
         app.contact().returnToHomePage();
-
+        assertThat(app.contact().count(), equalTo(before.size()));
         Contacts after = app.contact().all();
-        assertEquals(after.size(), before.size());
         assertThat(after, equalTo(before.withOut(deletedContact).withAdded(contact)));
     }
 
@@ -63,9 +62,9 @@ public class ContactModificationTests extends TestBase {
         ContactData deletedContact = before.iterator().next();
         app.contact().seeDetailsForDelete(deletedContact);
         app.goTo().homePage();
-
+        assertThat(app.contact().count(),equalTo(before.size() - 1));
         Contacts after = app.contact().all();
-        assertEquals(after.size(), before.size() - 1);
+
         assertThat(after, equalTo(before.withOut(deletedContact)));
     }
 
