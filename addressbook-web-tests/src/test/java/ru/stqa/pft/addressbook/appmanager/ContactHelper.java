@@ -1,12 +1,10 @@
 package ru.stqa.pft.addressbook.appmanager;
 
-import org.checkerframework.checker.units.qual.C;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
-import ru.stqa.pft.addressbook.model.Groups;
 
 import java.util.List;
 
@@ -17,7 +15,8 @@ public class ContactHelper extends HelperBase {
     }
 
     public void createFirstContact() {
-        create(new ContactData().withLastName("Semenovich").withFirstName("Anna"));
+        create(new ContactData().withLastName("Semenovich").withFirstName("Anna").withAddress("")
+                .withHomeTel("111").withMobileTel("2 33-3").withEmail("1_2@mail.ru").withEmail1("1-1@mail.ru"));
         returnToHomePage();
     }
 
@@ -69,9 +68,10 @@ public class ContactHelper extends HelperBase {
         String home = wd.findElement(By.name("home")).getAttribute("value");
         String mobile = wd.findElement(By.name("mobile")).getAttribute("value");
         String email = wd.findElement(By.name("email")).getAttribute("value");
+        String email1 = wd.findElement(By.name("email2")).getAttribute("value");
         wd.navigate().back();
         return new ContactData().withId(contact.getId()).withFirstName(firstname).withLastName(lastname)
-                .withAddress(address).withHomeTel(home).withMobileTel(mobile).withEmail(email);
+                .withAddress(address).withHomeTel(home).withMobileTel(mobile).withEmail(email).withEmail1(email1);
     }
 
     public void initContactModificationById(int id) {
@@ -85,8 +85,10 @@ public class ContactHelper extends HelperBase {
         type(By.name("lastname"), contactData.getLastName());
         type(By.name("firstname"), contactData.getFirstName());
         type(By.name("address"), contactData.getAddress());
-        type(By.name("email"), contactData.getEmail());
+        type(By.name("home"), contactData.getHomeTel());
         type(By.name("mobile"), contactData.getMobileTel());
+        type(By.name("email"), contactData.getEmail());
+        type(By.name("email2"), contactData.getEmail());
     }
 
     public void returnToHomePage() {
@@ -153,12 +155,11 @@ public class ContactHelper extends HelperBase {
             String lastName = data.get(1).getText();
             String firstName = data.get(2).getText();
             String address = data.get(3).getText();
-            String email = data.get(4).getText();
-            String[] phones = data.get(5).getText().split("\n");
-
+            String allEmail = data.get(4).getText();
+            String allPhones = data.get(5).getText();
             contactCache.add(new ContactData()
                     .withId(id).withLastName(lastName).withFirstName(firstName).withAddress(address)
-                    .withEmail(email).withHomeTel(phones[0]).withMobileTel(phones[1]));
+                    .withAllEmails(allEmail).withAllPhones(allPhones));
         }
         return new Contacts(contactCache);
     }

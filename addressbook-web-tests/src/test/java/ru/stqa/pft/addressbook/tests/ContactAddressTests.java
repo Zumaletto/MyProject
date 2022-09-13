@@ -10,8 +10,7 @@ import java.util.stream.Collectors;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class ContactPhoneTest extends TestBase {
-
+public class ContactAddressTests extends TestBase{
     @BeforeMethod
     public void ensurePreconditions() {
         app.goTo().homePage();
@@ -22,24 +21,16 @@ public class ContactPhoneTest extends TestBase {
     }
 
     @Test
-    public void testContactPhones() {
+    public void testContactAddress() {
         app.goTo().homePage();
         ContactData contact = app.contact().all().iterator().next();
         ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
-
-        assertThat(contact.getAllPhones(), equalTo(mergePhones(contactInfoFromEditForm)));
-
+        assertThat(contact.getAddress(), equalTo(mergeAddress(contactInfoFromEditForm)));
     }
 
-    private String mergePhones(ContactData contact) {
-        return Arrays.asList(contact.getHomeTel(), contact.getMobileTel())
+    private String mergeAddress(ContactData contact) {
+        return Arrays.asList(contact.getAddress())
                 .stream().filter((s) -> !s.equals(""))
-                .map(ContactPhoneTest::cleaned)
                 .collect(Collectors.joining("\n"));
-    }
-
-    public static String cleaned(String phone) {
-
-        return phone.replaceAll("\\s", "").replaceAll("[-()]", ""); //регулярные выражение. удаляет ненужные символы в телефоне
     }
 }
