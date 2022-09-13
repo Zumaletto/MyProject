@@ -61,6 +61,26 @@ public class ContactHelper extends HelperBase {
         contactCache = null;
     }
 
+    public ContactData infoFromEditForm(ContactData contact) {
+        initContactModificationById(contact.getId());
+        String firstname = wd.findElement(By.name("firstname")).getAttribute("value");
+        String lastname = wd.findElement(By.name("lastname")).getAttribute("value");
+        String address = wd.findElement(By.name("address")).getAttribute("value");
+        String home = wd.findElement(By.name("home")).getAttribute("value");
+        String mobile = wd.findElement(By.name("mobile")).getAttribute("value");
+        String email = wd.findElement(By.name("email")).getAttribute("value");
+        wd.navigate().back();
+        return new ContactData().withId(contact.getId()).withFirstName(firstname).withLastName(lastname)
+                .withAddress(address).withHomeTel(home).withMobileTel(mobile).withEmail(email);
+    }
+
+    public void initContactModificationById(int id) {
+        WebElement checkbox = wd.findElement(By.cssSelector(String.format("input[value='%s']", id)));
+        WebElement row = checkbox.findElement(By.xpath("./../.."));
+        List<WebElement> cells = row.findElements(By.tagName("td"));
+        cells.get(7).findElement(By.tagName("a")).click();
+    }
+
     public void fillContactForm(ContactData contactData) {
         type(By.name("lastname"), contactData.getLastName());
         type(By.name("firstname"), contactData.getFirstName());
@@ -90,8 +110,8 @@ public class ContactHelper extends HelperBase {
     }
 
     public void clickEditById(int id) {
-
-        wd.findElement(By.cssSelector("a[href='edit.php?id=" + id + "']")).click();
+        // wd.findElement(By.cssSelector("a[href='edit.php?id=" + id + "']")).click();
+        wd.findElement(By.cssSelector(String.format("a[href='edit.php?id=%s']", id))).click();
     }
 
     public void submitEditContact() {
@@ -129,16 +149,19 @@ public class ContactHelper extends HelperBase {
         List<WebElement> elements = wd.findElements(By.cssSelector("tr[name=entry]"));
         for (WebElement element : elements) {
             List<WebElement> data = element.findElements(By.tagName("td"));
+            int id = Integer.parseInt(data.get(0).findElement(By.tagName("input")).getAttribute("value"));
             String lastName = data.get(1).getText();
             String firstName = data.get(2).getText();
             String address = data.get(3).getText();
             String email = data.get(4).getText();
-            String phones = data.get(5).getText();
-            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+            String[] phones = data.get(5).getText().split("\n");
+
             contactCache.add(new ContactData()
-                    .withId(id).withLastName(lastName).withFirstName(firstName).withAddress(address).withEmail(email).withMobileTel(phones));
+                    .withId(id).withLastName(lastName).withFirstName(firstName).withAddress(address)
+                    .withEmail(email).withHomeTel(phones[0]).withMobileTel(phones[1]));
         }
         return new Contacts(contactCache);
     }
+
 
 }

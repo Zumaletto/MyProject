@@ -28,7 +28,7 @@ public class ContactModificationTests extends TestBase {
         app.contact().edit(deletedContact);
         ContactData contact = new ContactData()
                 .withId(deletedContact.getId()).withLastName("Loto").withFirstName("Igor").withAddress("St.Peterburg")
-                .withEmail("12783@mail.ru").withMobileTel("+79217771437");
+                .withEmail("12783@mail.ru").withMobileTel("+79217771437").withHomeTel("+78123457285");
         app.contact().createEdit(contact);
         app.contact().returnToHomePage();
         assertThat(app.contact().count(), equalTo(before.size()));
@@ -46,7 +46,7 @@ public class ContactModificationTests extends TestBase {
         app.contact().seeDetailsForEdit(deletedContact);
         ContactData contact = new ContactData()
                 .withId(deletedContact.getId()).withLastName("Vip").withFirstName("Andrey").withAddress("Minsk")
-                .withEmail("123@mail.ru").withMobileTel("+79217771477");
+                .withEmail("123@mail.ru").withMobileTel("+79217771477").withHomeTel("+78123457285");
         app.contact().createEdit(contact);
         app.contact().returnToHomePage();
         assertThat(app.contact().count(), equalTo(before.size()));

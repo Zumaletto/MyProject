@@ -16,7 +16,8 @@ public class ContactCreationTests extends TestBase {
         Contacts before = app.contact().all();
         app.goTo().addNewPage();
         ContactData contact = new ContactData()
-                .withLastName("Petrov").withFirstName("Anton").withAddress("Litva").withEmail("123@mail.ru").withMobileTel("+79217777777");
+                .withLastName("Petrov").withFirstName("Anton").withAddress("Litva").withEmail("123@mail.ru")
+                .withMobileTel("+79217777777").withHomeTel("+78123457285");
         app.contact().create(contact);
         app.contact().returnToHomePage();
         assertThat(app.contact().count(), equalTo(before.size() + 1));
@@ -33,7 +34,8 @@ public class ContactCreationTests extends TestBase {
         Contacts before = app.contact().all();
         app.goTo().addNewPage();
         ContactData contact = new ContactData()
-                .withLastName("Petrov'").withFirstName("Anton").withAddress("Litva").withEmail("123@mail.ru").withMobileTel("+79217777777");
+                .withLastName("Petrov'").withFirstName("Anton").withAddress("Litva").withEmail("123@mail.ru")
+                .withMobileTel("+79217777777").withHomeTel("+78123457455");
         app.contact().create(contact);
         app.contact().returnToHomePage();
         assertThat(app.contact().count(),equalTo(before.size()));
@@ -48,11 +50,13 @@ public class ContactCreationTests extends TestBase {
         Contacts before = app.contact().all();
         app.goTo().addNewPage();
         ContactData contact = new ContactData()
-                .withLastName("Pupkin").withFirstName("Alex").withAddress("St.Peterburg").withEmail("123@mail.ru").withMobileTel("+79217771477");
+                .withLastName("Pupkin").withFirstName("Alex").withAddress("St.Peterburg").withEmail("123@mail.ru")
+                .withMobileTel("+79217771477").withHomeTel("+78123457285");
         app.contact().create(contact);
         app.goTo().addNextContact();
         ContactData contactNext = new ContactData()
-                .withLastName("Ivanova").withFirstName("Olga").withAddress("Riga").withEmail("123@mail.ru").withMobileTel("+79217788777");
+                .withLastName("Ivanova").withFirstName("Olga").withAddress("Riga").withEmail("123@mail.ru")
+                .withMobileTel("+79217788777").withHomeTel("+78123457285");
         app.contact().create(contactNext);
         app.contact().returnToHomePage();
         Contacts after = app.contact().all();
