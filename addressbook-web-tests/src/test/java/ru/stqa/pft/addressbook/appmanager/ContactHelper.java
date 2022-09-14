@@ -15,8 +15,9 @@ public class ContactHelper extends HelperBase {
     }
 
     public void createFirstContact() {
-        create(new ContactData().withLastName("Semenovich").withFirstName("Anna").withAddress("")
-                .withHomeTel("111").withMobileTel("2 33-3").withEmail("1_2@mail.ru").withEmail1("1-1@mail.ru"));
+        create(new ContactData().withLastName("Semenovich").withFirstName("Anna").withAddress("City")
+                .withHomeTel("111").withMobileTel("2 33-3").withWorkTel("1556516546")
+                .withEmail("1_2@mail.ru").withEmail2("1-1@mail.ru").withEmail3("asdsda@mail.ru"));
         returnToHomePage();
     }
 
@@ -67,11 +68,14 @@ public class ContactHelper extends HelperBase {
         String address = wd.findElement(By.name("address")).getAttribute("value");
         String home = wd.findElement(By.name("home")).getAttribute("value");
         String mobile = wd.findElement(By.name("mobile")).getAttribute("value");
+        String work = wd.findElement(By.name("work")).getAttribute("value");
         String email = wd.findElement(By.name("email")).getAttribute("value");
-        String email1 = wd.findElement(By.name("email2")).getAttribute("value");
+        String email2 = wd.findElement(By.name("email2")).getAttribute("value");
+        String email3 = wd.findElement(By.name("email3")).getAttribute("value");
         wd.navigate().back();
         return new ContactData().withId(contact.getId()).withFirstName(firstname).withLastName(lastname)
-                .withAddress(address).withHomeTel(home).withMobileTel(mobile).withEmail(email).withEmail1(email1);
+                .withAddress(address).withHomeTel(home).withMobileTel(mobile).withWorkTel(work)
+                .withEmail(email).withEmail2(email2).withEmail3(email3);
     }
 
     public void initContactModificationById(int id) {
@@ -87,8 +91,10 @@ public class ContactHelper extends HelperBase {
         type(By.name("address"), contactData.getAddress());
         type(By.name("home"), contactData.getHomeTel());
         type(By.name("mobile"), contactData.getMobileTel());
+        type(By.name("work"), contactData.getWorkTel());
         type(By.name("email"), contactData.getEmail());
-        type(By.name("email2"), contactData.getEmail());
+        type(By.name("email2"), contactData.getEmail2());
+        type(By.name("email3"), contactData.getEmail3());
     }
 
     public void returnToHomePage() {

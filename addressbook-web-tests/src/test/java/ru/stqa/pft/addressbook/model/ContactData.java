@@ -1,14 +1,18 @@
 package ru.stqa.pft.addressbook.model;
 
+import java.util.Objects;
+
 public class ContactData {
     private int id = Integer.MAX_VALUE;
     private String lastName;
     private String firstName;
     private String address;
     private String email;
-    private String email1;
+    private String email2;
+    private String email3;
     private String homeTel;
     private String mobileTel;
+    private String workTel;
     private String allPhones;
     private String allEmails;
 
@@ -31,8 +35,12 @@ public class ContactData {
         this.email = email;
         return this;
     }
-    public ContactData withEmail1(String email1) {
-        this.email1 = email1;
+    public ContactData withEmail2(String email2) {
+        this.email2 = email2;
+        return this;
+    }
+    public ContactData withEmail3(String email3) {
+        this.email3 = email3;
         return this;
     }
 
@@ -43,6 +51,11 @@ public class ContactData {
 
     public ContactData withHomeTel(String homeTel) {
         this.homeTel = homeTel;
+        return this;
+    }
+
+    public ContactData withWorkTel(String workTel) {
+        this.workTel = workTel;
         return this;
     }
 
@@ -84,16 +97,26 @@ public class ContactData {
         return mobileTel;
     }
 
+    public String getWorkTel() {
+        return workTel;
+    }
+
     public String getEmail() {
         return email;
     }
-    public String getEmail1() {
-        return email1;
+
+    public String getEmail2() {
+        return email2;
+    }
+
+    public String getEmail3() {
+        return email3;
     }
 
     public String getAllPhones() {
         return allPhones;
     }
+
     public String getAllEmails() {
         return allEmails;
     }
@@ -116,14 +139,7 @@ public class ContactData {
 
         if (id != that.id) return false;
         if (lastName != null ? !lastName.equals(that.lastName) : that.lastName != null) return false;
-        if (firstName != null ? !firstName.equals(that.firstName) : that.firstName != null) return false;
-        if (address != null ? !address.equals(that.address) : that.address != null) return false;
-        if (email != null ? !email.equals(that.email) : that.email != null) return false;
-        if (email1 != null ? !email1.equals(that.email1) : that.email1 != null) return false;
-        if (homeTel != null ? !homeTel.equals(that.homeTel) : that.homeTel != null) return false;
-        if (mobileTel != null ? !mobileTel.equals(that.mobileTel) : that.mobileTel != null) return false;
-        if (allPhones != null ? !allPhones.equals(that.allPhones) : that.allPhones != null) return false;
-        return allEmails != null ? allEmails.equals(that.allEmails) : that.allEmails == null;
+        return firstName != null ? firstName.equals(that.firstName) : that.firstName == null;
     }
 
     @Override
@@ -131,13 +147,11 @@ public class ContactData {
         int result = id;
         result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
         result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
-        result = 31 * result + (address != null ? address.hashCode() : 0);
-        result = 31 * result + (email != null ? email.hashCode() : 0);
-        result = 31 * result + (email1 != null ? email1.hashCode() : 0);
-        result = 31 * result + (homeTel != null ? homeTel.hashCode() : 0);
-        result = 31 * result + (mobileTel != null ? mobileTel.hashCode() : 0);
-        result = 31 * result + (allPhones != null ? allPhones.hashCode() : 0);
-        result = 31 * result + (allEmails != null ? allEmails.hashCode() : 0);
         return result;
     }
+
+   /* @Override
+    public int hashCode() {
+        return Objects.hash(id,lastName,firstName);
+    }*/
 }

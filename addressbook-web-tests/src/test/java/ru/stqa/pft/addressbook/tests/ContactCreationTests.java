@@ -17,15 +17,15 @@ public class ContactCreationTests extends TestBase {
         app.goTo().addNewPage();
         ContactData contact = new ContactData()
                 .withLastName("Petrov").withFirstName("Anton").withAddress("Riga, Tytyh2ki street,17, 78549")
-                .withHomeTel("+78123457285").withMobileTel("+79217777777").withEmail("123@mail.ru").withEmail("qw@mail.ru");
+                .withHomeTel("+7 812 345 72 85").withMobileTel("+79217777777").withWorkTel("8(812)55-33-15")
+                .withEmail("123@mail.ru").withEmail2("qw@mail.ru").withEmail3("abv@mail.ru");
         app.contact().create(contact);
         app.contact().returnToHomePage();
         assertThat(app.contact().count(), equalTo(before.size() + 1));
         Contacts after = app.contact().all();
 
-        assertThat(after, equalTo(before.withAdded(
-                contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
-
+        assertThat(after, equalTo(
+                before.withAdded(contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
     }
 
     @Test(enabled = true)
@@ -34,11 +34,12 @@ public class ContactCreationTests extends TestBase {
         Contacts before = app.contact().all();
         app.goTo().addNewPage();
         ContactData contact = new ContactData()
-                .withLastName("Petrov").withFirstName("Anton").withAddress("Litva")
-                .withHomeTel("+7 87285").withMobileTel("+792177-77").withEmail("123@mail.ru").withEmail1("123@mail.ru");
+                .withLastName("Petrov'").withFirstName("Anton").withAddress("Litva")
+                .withHomeTel("+7 87285").withMobileTel("+792177-77").withWorkTel("8(812)55-33-15")
+                .withEmail("123@mail.ru").withEmail2("123@mail.ru").withEmail3("");
         app.contact().create(contact);
         app.contact().returnToHomePage();
-        assertEquals(app.contact().count(),before.size());
+        assertThat(app.contact().count(),equalTo(before.size()));
         Contacts after = app.contact().all();
         assertThat(after, equalTo(before));
 

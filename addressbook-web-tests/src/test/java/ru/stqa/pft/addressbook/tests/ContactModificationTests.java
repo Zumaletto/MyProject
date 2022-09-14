@@ -27,8 +27,9 @@ public class ContactModificationTests extends TestBase {
         ContactData deletedContact = before.iterator().next();
         app.contact().edit(deletedContact);
         ContactData contact = new ContactData()
-                .withId(deletedContact.getId()).withLastName("Loto").withFirstName("Igor").withAddress("St.Peterburg")
-                .withEmail("13@mail.ru").withEmail1("10@mail.ru").withMobileTel("+79217771437").withHomeTel("+78123457285");
+                .withLastName("Petrov").withFirstName("Anton").withAddress("Riga, Tytyh2ki street,17, 78549")
+                .withHomeTel("+7 812 345 72 85").withMobileTel("+79217777777").withWorkTel("8(812)55-33-15")
+                .withEmail("123@mail.ru").withEmail2("qw@mail.ru").withEmail3("abv@mail.ru");
         app.contact().createEdit(contact);
         app.contact().returnToHomePage();
         assertThat(app.contact().count(), equalTo(before.size()));
@@ -45,8 +46,8 @@ public class ContactModificationTests extends TestBase {
         ContactData deletedContact = before.iterator().next();
         app.contact().seeDetailsForEdit(deletedContact);
         ContactData contact = new ContactData()
-                .withId(deletedContact.getId()).withLastName("Vip").withFirstName("Andrey").withAddress("Minsk")
-                .withEmail("123@mail.ru").withEmail1("1@mail.ru").withMobileTel("+79217771477").withHomeTel("+78123457285");
+                .withLastName("Petrov").withFirstName("Anton").withAddress("Riga, Tytyh2ki street,17, 78549")
+                .withHomeTel("+7 812 345 72 85").withWorkTel("8(812)55-33-15").withEmail("123@mail.ru").withEmail2("qw@mail.ru");
         app.contact().createEdit(contact);
         app.contact().returnToHomePage();
         assertThat(app.contact().count(), equalTo(before.size()));
