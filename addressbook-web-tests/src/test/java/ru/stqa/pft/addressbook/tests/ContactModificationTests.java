@@ -26,7 +26,7 @@ public class ContactModificationTests extends TestBase {
         Contacts before = app.contact().all();
         ContactData deletedContact = before.iterator().next();
         app.contact().edit(deletedContact);
-        ContactData contact = new ContactData()
+        ContactData contact = new ContactData().withId(deletedContact.getId())
                 .withLastName("Petrov").withFirstName("Anton").withAddress("Riga, Tytyh2ki street,17, 78549")
                 .withHomeTel("+7 812 345 72 85").withMobileTel("+79217777777").withWorkTel("8(812)55-33-15")
                 .withEmail("123@mail.ru").withEmail2("qw@mail.ru").withEmail3("abv@mail.ru");
@@ -45,7 +45,7 @@ public class ContactModificationTests extends TestBase {
         Contacts before = app.contact().all();
         ContactData deletedContact = before.iterator().next();
         app.contact().seeDetailsForEdit(deletedContact);
-        ContactData contact = new ContactData()
+        ContactData contact = new ContactData().withId(deletedContact.getId())
                 .withLastName("Petrov").withFirstName("Anton").withAddress("Riga, Tytyh2ki street,17, 78549")
                 .withHomeTel("+7 812 345 72 85").withWorkTel("8(812)55-33-15").withEmail("123@mail.ru").withEmail2("qw@mail.ru");
         app.contact().createEdit(contact);
