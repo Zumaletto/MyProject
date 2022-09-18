@@ -28,6 +28,8 @@ public class GroupCreationTests extends TestBase {
         return list.iterator();
     } //итератор массивов объектов
 
+
+
     @DataProvider//провайдер тестовых данных
     public Iterator<Object[]> invalidGroups() {
         List<Object[]> list = new ArrayList<Object[]>();

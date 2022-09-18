@@ -13,6 +13,7 @@ dependencies {
     testImplementation group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.36'
     testImplementation 'org.hamcrest:java-hamcrest:2.0.0.0'
     implementation group: 'com.beust', name: 'jcommander', version: '1.48'
+    implementation group: 'com.thoughtworks.xstream', name: 'xstream', version: '1.4.18'
 }
 
 test {
