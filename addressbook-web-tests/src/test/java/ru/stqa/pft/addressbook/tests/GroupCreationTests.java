@@ -1,6 +1,8 @@
 package ru.stqa.pft.addressbook.tests;
 
+import com.google.gson.Gson;
 import com.thoughtworks.xstream.XStream;
+import org.openqa.selenium.json.TypeToken;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.GroupData;
@@ -35,6 +37,20 @@ public class GroupCreationTests extends TestBase {
         }//итератор массивов объектов
     }
 
+    @DataProvider//провайдер тестовых данных
+    public Iterator<Object[]> validGroupsJson() throws IOException {
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/test/resources/groups.json"))) {
+            String json = "";
+            String line = reader.readLine();
+            while (line != null) {
+                json += line;
+                line = reader.readLine();
+            }
+            Gson gson = new Gson();
+            List<GroupData> groups = gson.fromJson(json, new TypeToken<List<GroupData>>() {}.getType());
+            return groups.stream().map((g) -> new Object[]{g}).collect(Collectors.toList()).iterator();
+        }//итератор массивов объектов
+    }
 
     @DataProvider//провайдер тестовых данных
     public Iterator<Object[]> invalidGroups() {
@@ -43,7 +59,7 @@ public class GroupCreationTests extends TestBase {
         return list.iterator();
     }
 
-    @Test(dataProvider = "validGroupsXml")
+    @Test(dataProvider = "validGroupsJson")
     public void testGroupCreation(GroupData group) throws Exception {
         app.goTo().groupPage();
         Groups before = app.group().all();
