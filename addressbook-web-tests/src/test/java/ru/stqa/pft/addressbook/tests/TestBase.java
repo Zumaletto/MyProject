@@ -7,11 +7,8 @@ import ru.stqa.pft.addressbook.appmanager.ApplicationManager;
 
 public class TestBase {
     //Запуск через Firefox
-    protected static final ApplicationManager app = new ApplicationManager(BrowserType.FIREFOX);
-//Запуск через Chrome
-  //  protected static final ApplicationManager app = new ApplicationManager(BrowserType.CHROME);
-//Запуск через IE
-    //  protected final ApplicationManager app = new ApplicationManager(BrowserType.IE);
+    protected static final ApplicationManager app
+            = new ApplicationManager(System.getProperty("browser", BrowserType.CHROME));
 
     @BeforeSuite
     public void setUp() throws Exception {
