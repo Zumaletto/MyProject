@@ -45,12 +45,12 @@ public class HbConnectionTest {
         session.close();
     }
 
-    @Test (enabled = false)
+    @Test (enabled = true)
     public void testHbConnectionContact() {
         //извлекаем из БД информацию
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        List<ContactData> result = session.createQuery("from ContactData").list();
+        List<ContactData> result = session.createQuery("from ContactData where deprecated = '0000-00-00'").list();
         for (ContactData contact : result) {
             System.out.println(contact);
         }
