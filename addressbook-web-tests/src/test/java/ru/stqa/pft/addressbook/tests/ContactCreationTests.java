@@ -7,9 +7,11 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
-import ru.stqa.pft.addressbook.model.GroupData;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -66,12 +68,12 @@ public class ContactCreationTests extends TestBase {
     @Test(dataProvider = "validContact")
     public void testContactCreation(ContactData contact) throws Exception {
         app.goTo().homePage();
-        Contacts before = app.contact().all();
+        Contacts before = app.db().contact();
         app.goTo().addNewPage();
         app.contact().create(contact);
         app.contact().returnToHomePage();
         assertThat(app.contact().count(), equalTo(before.size() + 1));
-        Contacts after = app.contact().all();
+        Contacts after = app.db().contact();
 
         assertThat(after, equalTo(
                 before.withAdded(contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
@@ -80,7 +82,7 @@ public class ContactCreationTests extends TestBase {
     @Test
     public void testContactCreationWithPhoto() throws Exception {
         app.goTo().homePage();
-        Contacts before = app.contact().all();
+        Contacts before = app.db().contact();
         app.goTo().addNewPage();
         File photo = new File("src/test/resources/vi1.jpg");
         ContactData contact = new ContactData()
@@ -91,7 +93,7 @@ public class ContactCreationTests extends TestBase {
         app.contact().create(contact);
         app.contact().returnToHomePage();
         assertThat(app.contact().count(), equalTo(before.size() + 1));
-        Contacts after = app.contact().all();
+        Contacts after = app.db().contact();
 
         assertThat(after, equalTo(
                 before.withAdded(contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
@@ -100,7 +102,7 @@ public class ContactCreationTests extends TestBase {
     @Test
     public void testAddNextContact() {
         app.goTo().homePage();
-        Contacts before = app.contact().all();
+        Contacts before = app.db().contact();
         app.goTo().addNewPage();
         File photo = new File("src/test/resources/vi1.jpg");
         ContactData contact = new ContactData()
@@ -114,19 +116,19 @@ public class ContactCreationTests extends TestBase {
                 .withHomeTel("+7(921)275-85-87").withMobileTel("+792177-77").withEmail("123@mail.ru");
         app.contact().create(contactNext);
         app.contact().returnToHomePage();
-        Contacts after = app.contact().all();
+        Contacts after = app.db().contact();
         assertEquals(after.size(), before.size() + 2);
     }
 
     @Test(dataProvider = "invalidContact")
     public void testBadContactCreation(ContactData contact) throws Exception {
         app.goTo().homePage();
-        Contacts before = app.contact().all();
+        Contacts before = app.db().contact();
         app.goTo().addNewPage();
         app.contact().create(contact);
         app.contact().returnToHomePage();
         assertThat(app.contact().count(), equalTo(before.size()));
-        Contacts after = app.contact().all();
+        Contacts after = app.db().contact();
         assertThat(after, equalTo(before));
 
     }
