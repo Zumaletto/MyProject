@@ -26,9 +26,20 @@ public class ContactHelper extends HelperBase {
         submitContactCreation();
         contactCache = null;
     }
+    public void createWithPhoto(ContactData contact) {
+        fillContactFormWithPhoto(contact);
+        submitContactCreation();
+        contactCache = null;
+    }
 
     public void createEdit(ContactData contact) {
         fillContactForm(contact);
+        submitEditContact();
+        contactCache = null;
+    }
+
+    public void createEditWithPhoto(ContactData contact) {
+        fillContactFormWithPhoto(contact);
         submitEditContact();
         contactCache = null;
     }
@@ -86,6 +97,19 @@ public class ContactHelper extends HelperBase {
     }
 
     public void fillContactForm(ContactData contactData) {
+        type(By.name("lastname"), contactData.getLastName());
+        type(By.name("firstname"), contactData.getFirstName());
+        type(By.name("address"), contactData.getAddress());
+        type(By.name("home"), contactData.getHomeTel());
+        type(By.name("mobile"), contactData.getMobileTel());
+        type(By.name("work"), contactData.getWorkTel());
+        type(By.name("email"), contactData.getEmail());
+        type(By.name("email2"), contactData.getEmail2());
+        type(By.name("email3"), contactData.getEmail3());
+       // attach(By.name("photo"), contactData.getPhoto());
+    }
+
+    public void fillContactFormWithPhoto(ContactData contactData) {
         type(By.name("lastname"), contactData.getLastName());
         type(By.name("firstname"), contactData.getFirstName());
         type(By.name("address"), contactData.getAddress());

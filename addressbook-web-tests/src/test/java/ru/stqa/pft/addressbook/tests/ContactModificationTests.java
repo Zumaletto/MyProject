@@ -5,6 +5,8 @@ import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
 
+import java.io.File;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.testng.Assert.assertEquals;
@@ -35,8 +37,24 @@ public class ContactModificationTests extends TestBase {
         assertThat(app.contact().count(), equalTo(before.size()));
         Contacts after = app.db().contact();
         assertThat(after, equalTo(before.withOut(deletedContact).withAdded(contact)));
+    }
 
+    @Test(enabled = true)
+    public void testEditContactWithPhoto() {
 
+        Contacts before = app.db().contact();
+        ContactData deletedContact = before.iterator().next();
+        app.contact().edit(deletedContact);
+        File photo = new File("src/test/resources/vi1.jpg");
+        ContactData contact = new ContactData().withId(deletedContact.getId())
+                .withLastName("Petrov").withFirstName("Anton").withAddress("Riga, Tytyh2ki street,17, 78549")
+                .withHomeTel("+7 812 345 72 85").withMobileTel("+79217777777").withWorkTel("8(812)55-33-15")
+                .withEmail("123@mail.ru").withEmail2("qw@mail.ru").withEmail3("abv@mail.ru").withPhoto(photo);
+        app.contact().createEditWithPhoto(contact);
+        app.contact().returnToHomePage();
+        assertThat(app.contact().count(), equalTo(before.size()));
+        Contacts after = app.db().contact();
+        assertThat(after, equalTo(before.withOut(deletedContact).withAdded(contact)));
     }
 
     @Test(enabled = true)

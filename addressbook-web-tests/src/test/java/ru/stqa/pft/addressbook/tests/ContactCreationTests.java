@@ -90,7 +90,7 @@ public class ContactCreationTests extends TestBase {
                 .withHomeTel("+7 812 345 72 85").withMobileTel("+79217777777").withWorkTel("8(812)55-33-15")
                 .withEmail("123@mail.ru").withEmail2("qw@mail.ru").withEmail3("abv@mail.ru").withPhoto(photo);
         app.goTo().addNewPage();
-        app.contact().create(contact);
+        app.contact().createWithPhoto(contact);
         app.contact().returnToHomePage();
         assertThat(app.contact().count(), equalTo(before.size() + 1));
         Contacts after = app.db().contact();
@@ -109,7 +109,7 @@ public class ContactCreationTests extends TestBase {
                 .withLastName("Petrov").withFirstName("Anton").withAddress("Riga, Tytyh2ki street,17, 78549")
                 .withHomeTel("+7 812 345 72 85").withMobileTel("+79217777777").withWorkTel("8(812)55-33-15")
                 .withEmail("123@mail.ru").withEmail2("qw@mail.ru").withEmail3("abv@mail.ru").withPhoto(photo);
-        app.contact().create(contact);
+        app.contact().createWithPhoto(contact);
         app.goTo().addNextContact();
         ContactData contactNext = new ContactData()
                 .withLastName("Ivanova").withFirstName("Olga").withAddress("Riga")
