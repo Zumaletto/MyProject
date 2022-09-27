@@ -74,7 +74,8 @@ public class GroupCreationTests extends TestBase {
 
         assertThat(after, equalTo(
                 before.withAdded(group.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
-            }
+        verifyGroupListInUI();
+    }
 
     @Test(dataProvider = "invalidGroups")
     public void testBadGroupCreation(GroupData group) throws Exception {
@@ -84,6 +85,7 @@ public class GroupCreationTests extends TestBase {
         assertThat(app.group().count(), equalTo(before.size()));
         Groups after = app.db().groups();
         assertThat(after, equalTo(before));
+        verifyGroupListInUI();
     }
 
 

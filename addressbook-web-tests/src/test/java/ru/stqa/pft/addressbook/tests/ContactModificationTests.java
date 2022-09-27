@@ -37,6 +37,7 @@ public class ContactModificationTests extends TestBase {
         assertThat(app.contact().count(), equalTo(before.size()));
         Contacts after = app.db().contact();
         assertThat(after, equalTo(before.withOut(deletedContact).withAdded(contact)));
+        verifyContactListInUI();
     }
 
     @Test(enabled = true)
@@ -55,6 +56,7 @@ public class ContactModificationTests extends TestBase {
         assertThat(app.contact().count(), equalTo(before.size()));
         Contacts after = app.db().contact();
         assertThat(after, equalTo(before.withOut(deletedContact).withAdded(contact)));
+        verifyContactListInUI();
     }
 
     @Test(enabled = true)
@@ -71,6 +73,7 @@ public class ContactModificationTests extends TestBase {
         assertThat(app.contact().count(), equalTo(before.size()));
         Contacts after = app.db().contact();
         assertThat(after, equalTo(before.withOut(deletedContact).withAdded(contact)));
+        verifyContactListInUI();
     }
 
 
@@ -83,8 +86,8 @@ public class ContactModificationTests extends TestBase {
         app.goTo().homePage();
         assertThat(app.contact().count(),equalTo(before.size() - 1));
         Contacts after = app.db().contact();
-
         assertThat(after, equalTo(before.withOut(deletedContact)));
+        verifyContactListInUI();
     }
 
 
@@ -98,7 +101,7 @@ public class ContactModificationTests extends TestBase {
 
         Contacts after = app.contact().all();
         assertEquals(before, after);
-
+        verifyContactListInUI();
     }
 
 }
