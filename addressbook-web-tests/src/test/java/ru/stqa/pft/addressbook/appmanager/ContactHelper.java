@@ -3,8 +3,10 @@ package ru.stqa.pft.addressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
+import ru.stqa.pft.addressbook.model.GroupData;
 
 import java.util.List;
 
@@ -26,6 +28,7 @@ public class ContactHelper extends HelperBase {
         submitContactCreation();
         contactCache = null;
     }
+
     public void createWithPhoto(ContactData contact) {
         fillContactFormWithPhoto(contact);
         submitContactCreation();
@@ -106,7 +109,7 @@ public class ContactHelper extends HelperBase {
         type(By.name("email"), contactData.getEmail());
         type(By.name("email2"), contactData.getEmail2());
         type(By.name("email3"), contactData.getEmail3());
-       // attach(By.name("photo"), contactData.getPhoto());
+        // attach(By.name("photo"), contactData.getPhoto());
     }
 
     public void fillContactFormWithPhoto(ContactData contactData) {
@@ -193,6 +196,25 @@ public class ContactHelper extends HelperBase {
                     .withAllEmails(allEmail).withAllPhones(allPhones));
         }
         return new Contacts(contactCache);
+    }
+
+    public void clickAllGroup(String name) {
+
+        new Select(wd.findElement(By.name("group"))).selectByVisibleText(name);
+    }
+
+    public void clickGroup(GroupData selectGroup) {
+
+        new Select(wd.findElement(By.name("group"))).selectByValue(String.valueOf(selectGroup.getId()));
+    }
+
+    public void clickGroupToAdd(GroupData selectGroup) {
+
+        new Select(wd.findElement(By.name("to_group"))).selectByValue(String.valueOf(selectGroup.getId()));
+    }
+
+    public void submitAddContactToGroup() {
+        wd.findElement(By.name("add")).click();
     }
 
 
