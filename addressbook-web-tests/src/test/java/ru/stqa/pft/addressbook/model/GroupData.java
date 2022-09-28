@@ -33,7 +33,7 @@ public class GroupData {
     @Type(type = "text")
     private String footer;
 
-    @ManyToMany(mappedBy = "groups", fetch = FetchType.EAGER)// в парком классе ContactData находим атрибут groups, откуда берем описания того, как организована связь с объектами
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "groups")// в парком классе ContactData находим атрибут groups, откуда берем описания того, как организована связь с объектами
     private Set<ContactData> contacts = new HashSet<ContactData>();
 
     public GroupData withId(int id) {
