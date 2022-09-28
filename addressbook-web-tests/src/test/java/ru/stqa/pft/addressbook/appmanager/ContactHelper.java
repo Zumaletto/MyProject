@@ -217,5 +217,22 @@ public class ContactHelper extends HelperBase {
         wd.findElement(By.name("add")).click();
     }
 
+    public void submitRemoveContactFromGroup() {
+        wd.findElement(By.name("remove")).click();
+    }
 
+    public ContactData selectContactToAdd(GroupData selectGroup, Contacts contacts) {
+
+        ContactData selectContact = null;
+        if (selectGroup.getContacts().size() == 0) {
+            selectContact = contacts.stream().iterator().next();
+            selectContactById(selectContact.getId());
+            clickGroupToAdd(selectGroup);
+            submitAddContactToGroup();
+        } else {
+            selectContact = selectGroup.getContacts().stream().iterator().next();
+        }
+        return selectContact;
+    }
 }
+
