@@ -3,7 +3,7 @@ package ru.stqa.pft.addressbook.model;
 import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
-import net.bytebuddy.build.Plugin;
+import org.hibernate.annotations.Proxy;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -75,7 +75,7 @@ public class ContactData {
     @Type(type = "text")
     private String photo;
 
-    @ManyToMany (fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "address_in_groups",
             joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "group_id"))
     private Set<GroupData> groups = new HashSet<GroupData>();
