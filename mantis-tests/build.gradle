@@ -13,6 +13,7 @@ dependencies {
     testImplementation group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.36'
     testImplementation 'org.hamcrest:java-hamcrest:2.0.0.0'
     implementation 'org.apache.httpcomponents:httpclient:4.5.13'
+    implementation group: 'commons-net', name: 'commons-net', version: '3.8.0'
 
 }
 
