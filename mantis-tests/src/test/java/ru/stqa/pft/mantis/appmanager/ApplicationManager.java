@@ -19,6 +19,7 @@ public class ApplicationManager {
 
     private String browser;
     private RegistrationHelper registrationHelper;
+    private FtpHelper ftp;
 
     public ApplicationManager(String browser) {
         this.browser = browser;
@@ -27,38 +28,43 @@ public class ApplicationManager {
 
     public void init() throws IOException {
         String target = System.getProperty("target", "local");
-        properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
+        properties.load(new FileReader(new File(String.format("mantis-tests/src/test/resources/%s.properties", target))));
 
     }
-
-
     public void logout() {
         wd.findElement(By.linkText("Logout")).click();
     }
 
-    public void stop(){
-        if(wd != null){
+    public void stop() {
+        if (wd != null) {
             wd.quit();
         }
     }
 
-    public HttpSession newSession(){
+    public HttpSession newSession() {
         return new HttpSession(this);
     }
 
     public String getProperty(String key) {
-       return properties.getProperty(key);
+        return properties.getProperty(key);
     }
 
     public RegistrationHelper registration() {
-        if(registrationHelper == null){
+        if (registrationHelper == null) {
             registrationHelper = new RegistrationHelper(this);
         }
         return registrationHelper;
-   }
+    }
+
+    public FtpHelper ftp() {
+        if(ftp == null) {
+            ftp = new FtpHelper(this);
+        }
+        return ftp;
+    }
 
     public WebDriver getDriver() {
-        if (wd == null){
+        if (wd == null) {
             if (browser.equals(BrowserType.CHROME)) {
                 wd = new ChromeDriver();
             } else if (browser.equals(BrowserType.FIREFOX)) {
