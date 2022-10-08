@@ -6,8 +6,6 @@ import org.testng.annotations.Test;
 import ru.lanwen.verbalregex.VerbalExpression;
 import ru.stqa.pft.mantis.model.MailMessage;
 
-import javax.mail.MessagingException;
-import java.io.IOException;
 import java.util.List;
 
 import static org.testng.AssertJUnit.assertTrue;
@@ -21,9 +19,9 @@ public class RegistrationTests extends TestBase{
     @Test
     public void testRegistration() throws Exception {
 
-        String user = "user1";
+        String user = "user4";
         String password = "password";
-        String email = "user1@localhost.localdomain";
+        String email = "user4@localhost.localdomain";
         app.registration().start(user, email);
         List<MailMessage> mailMessages = app.mail().waitForMail(2, 10000);
         String confirmationLink =  findConfirmationLink(mailMessages,email);
