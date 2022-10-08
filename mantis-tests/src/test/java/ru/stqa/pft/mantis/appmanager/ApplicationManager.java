@@ -21,6 +21,7 @@ public class ApplicationManager {
     private RegistrationHelper registrationHelper;
     private FtpHelper ftp;
     private MailHelper mailHelper;
+    private JamesHelper jamesHelper;
 
     public ApplicationManager(String browser) {
         this.browser = browser;
@@ -33,6 +34,7 @@ public class ApplicationManager {
         properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
 
     }
+
     public void logout() {
         wd.findElement(By.linkText("Logout")).click();
     }
@@ -53,14 +55,14 @@ public class ApplicationManager {
 
     public RegistrationHelper registration() {
         if (registrationHelper == null) {
-            registrationHelper = new RegistrationHelper(this);
+            registrationHelper = new RegistrationHelper(this);  //если RegistrationHelper == null, то его  инициализируем
         }
         return registrationHelper;
     }
 
     public FtpHelper ftp() {
-        if(ftp == null) {
-            ftp = new FtpHelper(this);
+        if (ftp == null) {
+            ftp = new FtpHelper(this); //если FtpHelper == null, то его  инициализируем
         }
         return ftp;
     }
@@ -81,10 +83,18 @@ public class ApplicationManager {
         return wd;
     }
 
-    public MailHelper mail(){
-        if(mailHelper == null){
-            mailHelper = new MailHelper(this);
+    public MailHelper mail() {
+        if (mailHelper == null) {
+            mailHelper = new MailHelper(this); //если MailHelper == null, то его  инициализируем
         }
         return mailHelper;
     }
+
+    public JamesHelper james() {
+        if (jamesHelper == null) {
+            jamesHelper = new JamesHelper(this); //если jamesHelper == null, то его  инициализируем
+        }
+        return jamesHelper;
+    }
+
 }
