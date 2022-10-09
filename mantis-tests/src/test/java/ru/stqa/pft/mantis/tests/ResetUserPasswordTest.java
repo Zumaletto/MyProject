@@ -24,7 +24,6 @@ public class ResetUserPasswordTest extends TestBase {
     public void testResetPassword() throws Exception {
         long now = System.currentTimeMillis();
         UserData admin = app.db().getUserByUsername(app.getProperty("web.adminLogin"));
-
         Users allUsers = app.db().users().without(admin);
         UserData selectedUser = null;
         List<MailMessage> mailMessages;
@@ -48,7 +47,6 @@ public class ResetUserPasswordTest extends TestBase {
         assertTrue(app.newSession().login(selectedUser.getUsername(), newPassword));
 
     }
-
 
     private String findConfirmationLink(List<MailMessage> mailMessages, String email) {
         MailMessage mailMessage = mailMessages.stream().filter((m) -> m.to.equals(email)).findFirst().get();

@@ -3,4 +3,5 @@ include 'sandbox'
 include 'Point'
 include 'addressbook-web-tests'
 include 'mantis-tests'
+include 'soap-sample'
 

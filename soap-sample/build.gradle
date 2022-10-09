@@ -1,0 +1,40 @@
+plugins {
+    id 'java'
+}
+
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation group: 'org.testng', name: 'testng', version: '7.6.1'
+    testImplementation 'org.seleniumhq.selenium:selenium-java:4.4.0'
+    testImplementation group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.36'
+    testImplementation 'org.hamcrest:java-hamcrest:2.0.0.0'
+    testImplementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.4.0'
+    implementation 'org.apache.httpcomponents:httpclient:4.5.13'
+    implementation group: 'commons-net', name: 'commons-net', version: '3.8.0'
+    implementation 'org.subethamail:subethasmtp:3.1.7'
+    implementation 'ru.lanwen.verbalregex:java-verbal-expressions:1.8'
+    implementation 'org.hibernate:hibernate-core:5.6.11.Final'
+
+
+}
+
+task {
+    useTestNG {
+        suites 'src/test/resources/testng.xml'
+    }
+    if (project.hasProperty('browser')) {
+        systemProperty 'browser', "${browser}"
+    }
+
+    if (project.hasProperty('target')) {
+        systemProperty 'target', "${target}"
+    }
+
+    if (project.hasProperty('verifyUI')) {
+        systemProperty 'verifyUI', "${verifyUI}"
+    }
+}
