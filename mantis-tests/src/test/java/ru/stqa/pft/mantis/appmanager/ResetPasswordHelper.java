@@ -17,11 +17,11 @@ public class ResetPasswordHelper extends HelperBase {
         wd.findElement(By.cssSelector("input[value='Вход']")).click();
     }
 
-    public void start(UserData selectedUser) {
-        wd.findElement(By.cssSelector("a[href='manager_overview_page.php']")).click();
-        wd.findElement(By.cssSelector("a[href='manager_user_page.php']")).click();
-        click(By.xpath("//a[text()='" + selectedUser.withId(selectedUser.getId()) + "']"));
-        wd.findElement(By.cssSelector("input[value='Сбросить пароль']")).click();
+    public void start(UserData selectedUser){
+        wd.findElement(By.cssSelector("a[href='/mantisbt-2.25.5/manage_overview_page.php']")).click();
+        wd.findElement(By.cssSelector("a[href='/mantisbt-2.25.5/manage_user_page.php']")).click();
+        click(By.xpath("//a[text()='" + selectedUser.getUsername() + "']"));
+        click(By.cssSelector("input[value='Сбросить пароль']"));
     }
 
     public void finish(String confirmationLink, String newPassword) {
