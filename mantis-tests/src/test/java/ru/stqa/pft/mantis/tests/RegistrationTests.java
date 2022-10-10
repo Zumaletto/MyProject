@@ -11,7 +11,7 @@ import java.util.List;
 import static org.testng.AssertJUnit.assertTrue;
 
 public class RegistrationTests extends TestBase {
-    //  @BeforeMethod
+    @BeforeMethod
     public void startMailServer() {
         app.mail().start();
     }
@@ -26,8 +26,8 @@ public class RegistrationTests extends TestBase {
 
         app.james().createUser(user, password); //создаем пользователя на почтовом сервере
         app.registration().start(user, email);
-        //List<MailMessage> mailMessages = app.mail().waitForMail(2, 10000);
-        List<MailMessage> mailMessages = app.james().waitForMail(user, password, 60000);
+        List<MailMessage> mailMessages = app.mail().waitForMail(2, 10000);
+       // List<MailMessage> mailMessages = app.james().waitForMail(user, password, 60000);
         String confirmationLink = findConfirmationLink(mailMessages, email);
         app.registration().finish(confirmationLink, password);
 
@@ -42,7 +42,7 @@ public class RegistrationTests extends TestBase {
 
     }
 
-    // @AfterMethod(alwaysRun = true)
+    @AfterMethod(alwaysRun = true)
     public void stopMailServer() {
         app.mail().stop();
     }
