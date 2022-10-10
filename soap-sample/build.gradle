@@ -6,13 +6,6 @@ repositories {
 
 dependencies {
     testImplementation group: 'org.testng', name: 'testng', version: '7.6.1'
-    implementation "jakarta.xml.bind:jakarta.xml.bind-api:2.3.2"
-    implementation "org.glassfish.jaxb:jaxb-runtime:2.3.2"
-    implementation 'com.sun.xml.bind:jaxb-xjc:2.3.0.1'
-    implementation 'javax.xml.bind:jaxb-api:2.3.1'
-    implementation 'javax.xml.ws:jaxws-api:2.3.1'
-    implementation 'org.apache.cxf:cxf-rt-wsdl:3.2.7'
-    implementation 'javax.jws:javax.jws-api:1.1'
 }
 
 buildscript{
@@ -22,6 +15,9 @@ buildscript{
     }
     dependencies {
         classpath 'no.nils:wsdl2java:0.10'
+        classpath("javax.xml:jaxb-api:2.1")
+        classpath("javax.xml.ws:jaxws-api:2.3.1")
+        classpath("com.sun.xml.ws:jaxws-ri:2.3.3")
     }
 }
 
@@ -31,6 +27,6 @@ wsdl2java {
     generatedWsdlDir = file("src/main/java")
     wsdlDir = file("src/main/resources")
     wsdlsToGenerate = [
-            ['src/main/resources/geoipservice.wsdl'],
+            ["$projectDir/src/main/resources/geoipservice.wsdl"],
     ]
 }
