@@ -17,9 +17,9 @@ public class ResetPasswordHelper extends HelperBase {
         wd.findElement(By.cssSelector("input[value='Вход']")).click();
     }
 
-    public void start(UserData selectedUser){
-        wd.findElement(By.cssSelector("a[href='/mantisbt-2.25.5/manage_overview_page.php']")).click();
-        wd.findElement(By.cssSelector("a[href='/mantisbt-2.25.5/manage_user_page.php']")).click();
+    public void start(UserData selectedUser) {
+        click(By.xpath("//div[@id='sidebar']/ul/li[6]/a/i"));
+        click(By.xpath("//a[contains(text(),'Управление пользователями')]"));
         click(By.xpath("//a[text()='" + selectedUser.getUsername() + "']"));
         click(By.cssSelector("input[value='Сбросить пароль']"));
     }
