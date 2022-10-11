@@ -24,9 +24,9 @@ buildscript{
 apply plugin: 'no.nils.wsdl2java'
 
 wsdl2java {
-    generatedWsdlDir = file("src/main/java")
-    wsdlDir = file("src/main/resources")
+    generatedWsdlDir = file("src/main/java") // сюда генерируются файлы из wsdl файла
+    wsdlDir = file("src/main/resources")  //вспомогательная директория, где хранятся вспомогательные файлы
     wsdlsToGenerate = [
-            ["$projectDir/src/main/resources/geoipservice.wsdl"],
+            ["$projectDir/src/main/resources/geoipservice.wsdl"], //файл который используем
     ]
 }
