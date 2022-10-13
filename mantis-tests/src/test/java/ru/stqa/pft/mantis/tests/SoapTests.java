@@ -33,11 +33,13 @@ public class SoapTests extends TestBase{
 
     @Test
     public void testCreateIssueWithSkip() throws MalformedURLException, ServiceException, RemoteException {
-        if(isIssueOpen(2) == true){
-            skipIfNotFixed(2);
+        if(isIssueOpen(1) == true){
+            skipIfNotFixed(1);
         } else{
+            Set<Project> projects = app.soap().getProjects();
             Issue issue = new Issue().withSummary("Bug report")
-                    .withDescription("Description");
+                    .withDescription("Description")
+                    .withProject(projects.iterator().next());;
             Issue createdIssue = app.soap().addIssue(issue);
             assertEquals(issue.getSummary(), createdIssue.getSummary());
         }
