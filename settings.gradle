@@ -5,4 +5,5 @@ include 'addressbook-web-tests'
 include 'mantis-tests'
 include 'soap-sample'
 include 'rest-sample'
+include 'github-sample'
 
